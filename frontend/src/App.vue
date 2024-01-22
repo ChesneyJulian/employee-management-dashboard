@@ -1,6 +1,5 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import ManagementDataService from './services/managementSystem'
 
 export default {
@@ -17,6 +16,12 @@ export default {
       for (let i = 0; i < dataLength; i++) {
         console.log(departmentData.data[i]);
       }
+    },
+    async login(event, email, password) {
+      event.preventDefault();
+      console.log(email, password);
+      const employeeData = await ManagementDataService.employeeLogin(email, password);
+      console.log(employeeData);
     }
   }
 }
@@ -28,13 +33,14 @@ export default {
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <button @click="getDepartments()">Get Departments</button>
       </nav>
+      <form>
+        <input v-model="email" placeholder="email">
+        <input v-model="password" placeholder="password">
+        <button :type="submit" @click="(event) => login(event, email, password)">Submit</button>
+      </form>
     </div>
   </header>
 

@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
 
         if (correctPassword) {
             signToken(employeeData);
-            res.status(200).json('Success');
+            res.status(200).json("Successfully logged in");
         } else {
             return res.status(404).json({ message: 'Incorrect password'});
         }
@@ -87,6 +87,12 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
+
+// router.post('/logout', async (req, res) => {
+//     try {} catch(err) {
+
+//     }
+// })
 
 module.exports = router;

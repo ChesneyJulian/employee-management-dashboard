@@ -19,7 +19,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const locationData = await Location.findAll();
         if (locationData) {

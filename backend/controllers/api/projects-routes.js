@@ -26,7 +26,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const projectData = await Projects.findAll({ include: [{ model: Employee }]});
         if (projectData) {

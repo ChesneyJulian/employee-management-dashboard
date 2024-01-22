@@ -7,7 +7,8 @@ class ManagementDataService {
     }
 
     employeeLogin = async (email, password) => {
-        const employeeData = await http.post("/api/employee/login", email, password);
+        console.log(email, password);
+        const employeeData = await http.post("/api/employee/login", { email, password });
         console.log(employeeData);
         return employeeData;
     }

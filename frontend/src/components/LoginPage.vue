@@ -31,10 +31,10 @@ export default {
     <p>Please log in with your employee credentials to continue.</p>
     <v-form @submit.prevent>
       <v-responsive class="mx-auto mb-4" min-width="344">
-        <v-text-field hide-details="auto" label="Email address" v-model="email" :rules="[required]" placeholder="johndoe@gmail.com" type="email"></v-text-field>
+        <v-text-field variant="solo" hide-details="auto" label="Email address" v-model="email" :rules="[required]" placeholder="johndoe@gmail.com" type="email"></v-text-field>
       </v-responsive>
       <v-responsive class="mx-auto" min-width="344">
-        <v-text-field v-model="password" :rules="[required]" label="Password" type="input"></v-text-field>
+        <v-text-field variant="solo" v-model="password" :rules="[required]" label="Password" type="input"></v-text-field>
       </v-responsive>
       <v-btn :type="submit" @click="login(email, password)" >
         Login
@@ -45,9 +45,9 @@ export default {
 
 <style scoped>
 header {
-/* max-width: 100vw; */
-/* height: 300px; */
-line-height: 3rem;
+padding: 28px;
+border-radius: 12px;;
+background-color: rgba(39, 135, 245, 0.62);
 color: #FFFFFF;
 display: flex;
 flex-direction: column;
@@ -55,8 +55,13 @@ align-items: center;
 justify-content: center;
 }
 h1 {
+line-height: 3rem;
+margin-bottom: 4px;
 font-weight: bolder;
 font-size: 2rem;
+}
+p {
+  margin-bottom: 4px;
 }
 form {
 padding: 16px;
@@ -65,8 +70,6 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 }
-/* form input {
-margin-bottom: 8px;
-padding: 4px;
-}  */
+
+
 </style> 

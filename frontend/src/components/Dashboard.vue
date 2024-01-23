@@ -1,44 +1,53 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+<script>
+  export default {
+    name: 'dashboard',
+    data: () => ({
+      cards: [
+        {
+          title: 'Your info',
+          description: 'View personal info',
+          flex: 12,
+          backgroundColor: 'rgba(246, 194, 82, 0.8)',
+        },
+        {
+          title: 'Your Projects',
+          description: 'View your current projects',
+          flex: 6,
+          backgroundColor: 'rgba(39, 135, 245, 0.62)',
+        },
+        {
+          title: 'Department Info',
+          description: 'View info about your department',
+          flex: 6,
+          backgroundColor: 'rgba(2, 187, 64, 0.48)',
+        },
+        {
+          title: 'Timecards',
+          description: 'View and edit your timecards',
+          flex: 12,
+          backgroundColor: 'rgba(234, 0, 46, 0.52)',
+        }
+      ],
+    }),
   }
-})
 </script>
-
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
-  </div>
+  <!-- <v-card class="mx-auto"> -->
+    <v-container class="mx-auto">
+      <v-row dense>
+        <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
+          <v-card class="align-end mr-4 mb-4" :style="{ backgroundColor: card.backgroundColor}"  height="200px" cover>
+              <v-card-title class="text-white font-weight-medium text-h4 my-2" v-text="card.title"></v-card-title>
+              <v-card-text class="text-white text-subtitle-1 font-weight-normal" v-text="card.description"></v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  <!-- </v-card> -->
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
 
-h3 {
-  font-size: 1.2rem;
-}
 
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
 
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
 </style>

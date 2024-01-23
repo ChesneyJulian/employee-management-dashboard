@@ -1,14 +1,20 @@
 <script>
+import ManagementDataService from '../services/managementSystem'
+import router from '../router/index'
+
 export default {
   name: "login",
   data() {
     return {
-
+      email: null,
+      password: null,
+      required (v) {
+        return !!v || 'Field is required'
+      },
     }
   },
   methods: {
-    async login(event, email, password) {
-      event.preventDefault();
+    async login(email, password) {
       console.log(email, password);
       const employeeData = await ManagementDataService.employeeLogin(email, password);
       console.log(employeeData);
@@ -23,11 +29,17 @@ export default {
 <header>
     <h1>Employee Management System</h1>
     <p>Please log in with your employee credentials to continue.</p>
-    <form>
-      <input v-model="email" placeholder="email">
-      <input v-model="password" placeholder="password">
-      <button :type="submit" @click="(event) => login(event, email, password)">Submit</button>
-    </form>
+    <v-form @submit.prevent>
+      <v-responsive class="mx-auto mb-4" min-width="344">
+        <v-text-field hide-details="auto" label="Email address" v-model="email" :rules="[required]" placeholder="johndoe@gmail.com" type="email"></v-text-field>
+      </v-responsive>
+      <v-responsive class="mx-auto" min-width="344">
+        <v-text-field v-model="password" :rules="[required]" label="Password" type="input"></v-text-field>
+      </v-responsive>
+      <v-btn :type="submit" @click="login(email, password)" >
+        Login
+      </v-btn>
+    </v-form>
 </header>
 </template>
 
@@ -53,8 +65,8 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 }
-form input {
+/* form input {
 margin-bottom: 8px;
 padding: 4px;
-}
-</style>
+}  */
+</style> 

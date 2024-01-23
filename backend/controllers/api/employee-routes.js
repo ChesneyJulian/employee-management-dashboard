@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Employee, Department, Salary, Projects } = require('../../models')
+const { Employee, Department, Projects } = require('../../models')
 const { signToken } = require('../../utils/auth');
 // create new employee data
 router.post('/create', async (req, res) => {
@@ -24,9 +24,7 @@ router.post('/create', async (req, res) => {
 router.get('/all', async (req, res) => {
     try {
         const employeeData = await Employee.findAll({ include: 
-        [{
-            model: Salary
-        },
+        [
         {
             model: Department
         },
@@ -78,8 +76,8 @@ router.post('/login', async (req, res) => {
         const correctPassword = employeeData.checkPassword(req.body.password);
 
         if (correctPassword) {
-            signToken(employeeData);
-            res.status(200).json("Successfully logged in");
+           const token =  signToken(employeeData);
+            res.status(200).json(token);
         } else {
             return res.status(404).json({ message: 'Incorrect password'});
         }

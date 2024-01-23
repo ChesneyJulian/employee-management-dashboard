@@ -24,6 +24,8 @@ module.exports = {
     },
     signToken: ({ employeeData }) => {
         const payload = { employeeData };
-        return jwt.sign({ data: payload }, secret, { expiresIn: timeOut });
+        const token = jwt.sign({ data: payload }, secret, { expiresIn: timeOut });
+        // console.log(token); 
+        return token;
     }
 };

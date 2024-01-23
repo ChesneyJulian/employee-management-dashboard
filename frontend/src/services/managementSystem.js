@@ -1,5 +1,5 @@
 import http from '../http-common';
-
+import AuthService from './auth'
 class ManagementDataService {
     getAllDepartments = async () => {
         const departmentData = await http.get("/api/department/all");
@@ -9,7 +9,7 @@ class ManagementDataService {
     employeeLogin = async (email, password) => {
         console.log(email, password);
         const employeeData = await http.post("/api/employee/login", { email, password });
-        console.log(employeeData);
+        AuthService.saveToken(employeeData.data);
         return employeeData;
     }
 };

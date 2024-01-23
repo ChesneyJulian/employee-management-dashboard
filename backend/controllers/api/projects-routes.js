@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Projects, EmployeeProjects, Employee } = require('../../models');
+const { Projects, EmployeeProjects, Employee, Tasks } = require('../../models');
 
 router.post('/create', async (req, res) => {
     try {
@@ -28,7 +28,10 @@ router.post('/create', async (req, res) => {
 
 router.get('/all', async (req, res) => {
     try {
-        const projectData = await Projects.findAll({ include: [{ model: Employee }]});
+        const projectData = await Projects.findAll({ include: [
+            { model: Employee },
+            { model: Tasks }
+        ]});
         if (projectData) {
             res.status(200).json(projectData);
         }

@@ -1,5 +1,6 @@
 <script>
 import ManagementDataService from '../services/managementSystem'
+import AuthService from '../services/auth'
 import router from '../router/index'
 
 export default {
@@ -18,7 +19,10 @@ export default {
       console.log(email, password);
       const employeeData = await ManagementDataService.employeeLogin(email, password);
       console.log(employeeData);
-      router.push({ name: 'dashboard' });
+      const validated = await AuthService.checkToken();
+      if (validated === true) {
+        router.push({ name: 'dashboard' });
+      }
     }
   }
 }

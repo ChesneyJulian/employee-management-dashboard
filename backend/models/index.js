@@ -2,19 +2,9 @@ const Employee = require('./Employee');
 const Department = require('./Department');
 const Location = require('./Location');
 const Projects = require('./Projects');
-const Salary = require('./Salary');
 const Timesheet = require('./Timesheet');
 const EmployeeProjects = require('./junctionTables/EmployeeProjects');
-
-
-// Employee One to One relationship with Salary
-Employee.hasOne(Salary, {
-    foreignKey: 'employeeId'
-});
-
-Salary.belongsTo(Employee, {
-    foreignKey: 'employeeId'
-});
+const Tasks = require('./Tasks');
 
 // Employee One to One relationship with Timesheet
 Employee.hasOne(Timesheet, {
@@ -26,7 +16,6 @@ Timesheet.belongsTo(Employee, {
 });
 
 // Employee Many to Many relationship with Projects
-
 Employee.belongsToMany(Projects, {
     through: EmployeeProjects,
     foreignKey: 'employeeId'
@@ -36,6 +25,15 @@ Projects.belongsToMany(Employee, {
     through: EmployeeProjects,
     foreignKey: 'projectId'
 });
+
+// One to many relationship between projects and tasks
+Projects.hasMany(Tasks, {
+    foreignKey: 'parentProject'
+});
+
+Tasks.belongsTo(Projects, {
+    foreignKey: 'parentProject'
+})
 
 // Employee One to Many relationship with department
 Department.hasMany(Employee, {
@@ -56,4 +54,4 @@ Department.belongsTo(Location, {
 });
 
 
-module.exports = { Employee, Department, Location, Salary, Projects, Timesheet, EmployeeProjects }
+module.exports = { Employee, Department, Location, Projects, Tasks, Timesheet, EmployeeProjects }

@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Salary extends Model {};
+class Tasks extends Model {};
 
-Salary.init(
+Tasks.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,20 +11,26 @@ Salary.init(
             autoIncrement: true,
             allowNull: false
         },
-        annual: {
-            type: DataTypes.INTEGER,
+        title: {
+            type: DataTypes.STRING,
             allowNull: false
         },
-        hourly: {
-            type: DataTypes.SMALLINT,
-            allowNull: false
+        description: {
+            type: DataTypes.STRING,
         },
-//    CREATE RELATIONSHIP TO EMPLOYEE
-        employeeId: {
+        inProgress: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        completed: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        parentProject: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'employee',
+                model: 'projects',
                 key: 'id'
             }
         }
@@ -33,7 +39,7 @@ Salary.init(
         sequelize,
         timestamps: false,
         freezeTableName: true,
-        modelName: 'salary'
+        modelName: 'tasks'
     });
 
-    module.exports = Salary;
+module.exports = Tasks;

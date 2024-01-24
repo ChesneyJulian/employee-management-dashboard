@@ -6,9 +6,9 @@ import navbar from '../components/Navigation.vue'
 <template>
   <section>
     <navbar />
-    <container class="mx-auto">
+    <section class="mx-auto">
       <dashboard />
-    </container>
+    </section>
   </section>
 </template>
 

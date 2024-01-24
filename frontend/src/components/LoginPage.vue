@@ -17,14 +17,11 @@ export default {
     async login(email, password) {
       const data = await ManagementDataService.employeeLogin(email, password);
       const employeeInfo = data.employeeData;
-      console.log(employeeInfo);
       router.push({ path: `/dashboard/${employeeInfo.id}`});
       this.$store.commit({
         type: 'assign',
         data: employeeInfo
       });
-
-      console.log(this.$store.state)
     }
   }
 }
@@ -40,9 +37,9 @@ export default {
         <v-text-field variant="solo" hide-details="auto" label="Email address" v-model="email" :rules="[required]" placeholder="johndoe@gmail.com" type="email"></v-text-field>
       </v-responsive>
       <v-responsive class="mx-auto" min-width="344">
-        <v-text-field variant="solo" v-model="password" :rules="[required]" label="Password" type="input"></v-text-field>
+        <v-text-field variant="solo" v-model="password" :rules="[required]" label="Password" type="password"></v-text-field>
       </v-responsive>
-      <v-btn :type="submit" @click="login(email, password)" >
+      <v-btn :type="'submit'" @click="login(email, password)" >
         Login
       </v-btn>
     </v-form>

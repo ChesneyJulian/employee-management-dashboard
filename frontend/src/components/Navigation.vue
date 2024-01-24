@@ -53,7 +53,7 @@ import AuthServices from '../services/auth'
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>{{this.$store.state.name}}</v-toolbar-title>
+        <v-toolbar-title>{{this.$store.state.name}} - Employee Dashboard</v-toolbar-title>
 
         <v-spacer></v-spacer>
 

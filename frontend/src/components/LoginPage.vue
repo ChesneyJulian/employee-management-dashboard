@@ -1,6 +1,5 @@
 <script>
 import ManagementDataService from '../services/managementSystem'
-import AuthService from '../services/auth'
 import router from '../router/index'
 
 export default {
@@ -16,9 +15,16 @@ export default {
   },
   methods: {
     async login(email, password) {
-      console.log(email, password);
-      await ManagementDataService.employeeLogin(email, password);
-        router.push({ name: 'dashboard' });
+      const data = await ManagementDataService.employeeLogin(email, password);
+      const employeeInfo = data.employeeData;
+      console.log(employeeInfo);
+      router.push({ path: `/dashboard/${employeeInfo.id}`});
+      this.$store.commit({
+        type: 'assign',
+        data: employeeInfo
+      });
+
+      console.log(this.$store.state)
     }
   }
 }

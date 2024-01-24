@@ -9,6 +9,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { createStore } from 'vuex';
 
 const vuetify = createVuetify({
   components,
@@ -18,9 +19,34 @@ const vuetify = createVuetify({
   },
 })
 
+const store = createStore({
+  state () {
+    return {
+      employeeId: null,
+      name: '',
+      departmentId: null,
+      email: ''
+    }
+  },
+  mutations: {
+    assign (state, { data }) {
+      state.employeeId = data.id,
+      state.name = data.firstName;
+      state.departmentId = data.departmentId,
+      state.email = data.email
+    }
+  },
+  getters: {
+    getEmployeeInfo (statte) {
+      return this.$store
+    }
+  }
+})
+
 const app = createApp(App)
 
 app.use(router);
 app.use(vuetify);
+app.use(store);
 
 app.mount('#app')

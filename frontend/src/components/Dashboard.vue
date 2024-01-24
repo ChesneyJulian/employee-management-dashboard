@@ -44,6 +44,7 @@ import router from '../router/index'
 <template>
   <v-container class="mx-auto">
     <v-row dense>
+      <!-- <h1>{{ console.log(this.props) }}</h1> -->
       <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
         <v-hover v-slot="{ isHovering, props }">
           <v-card 
@@ -53,7 +54,8 @@ import router from '../router/index'
           v-bind="props"  
           height="200px"
           @click="followPath(card.path)">
-            <v-card-title class="text-white font-weight-medium text-h4 my-2" v-text="card.title"></v-card-title>
+          <v-card-title class="text-white font-weight-medium text-h4 my-2" v-text="card.title"></v-card-title>
+
             <v-card-text class="text-white text-subtitle-1 font-weight-normal" v-text="card.description"></v-card-text>
           </v-card>
         </v-hover>

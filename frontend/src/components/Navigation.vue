@@ -34,6 +34,9 @@ import AuthServices from '../services/auth'
       async logout() {
         AuthServices.destroyToken();
         router.push({ name: 'home' });
+      },
+      toDashboard() {
+        router.push({ path: `dashboard/${this.$store.state.employeeId}` });
       }
     },
   }
@@ -50,11 +53,11 @@ import AuthServices from '../services/auth'
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>My files</v-toolbar-title>
+        <v-toolbar-title>{{this.$store.state.name}}</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-        <v-btn variant="text" icon="mdi-home" @click="router.push({ name: 'dashboard'})"></v-btn>
+        <v-btn variant="text" icon="mdi-home" @click="toDashboard()"></v-btn>
 
         <v-btn variant="text" icon="mdi-logout" @click="logout()"></v-btn>
       </v-app-bar>

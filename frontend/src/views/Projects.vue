@@ -1,12 +1,12 @@
 <script setup>
 import navbar from '../components/Navigation.vue'
-// export default {
-//   data () {
-//     return {
-//         name: 'projects'
-//     }
-//   }
-// }
+data () ({
+  methods: {
+    getInfo() {
+      
+    }
+  }
+})
 </script>
 
 <template>

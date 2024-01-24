@@ -16,9 +16,10 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/dashboard',
+      path: '/dashboard/:id',
       name: 'dashboard',
-      component: Dashboard
+      component: Dashboard,
+      props: true,
     },
     {
       path: '/projects',

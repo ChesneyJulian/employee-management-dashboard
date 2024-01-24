@@ -35,11 +35,6 @@ const store = createStore({
       state.departmentId = data.departmentId,
       state.email = data.email
     }
-  },
-  getters: {
-    getEmployeeInfo (statte) {
-      return this.$store
-    }
   }
 })
 

@@ -13,6 +13,13 @@ class ManagementDataService {
         AuthService.saveToken(employeeData.data.token);
         return employeeData.data;
     }
+
+    fetchProjects = async (id) => {
+        console.log('EMPLOYEE ID ', id)
+        const employeeProjectData = await http.post("/api/employee/your-projects", { "id": id });
+        console.log('Your Projets ', employeeProjectData)
+        return employeeProjectData;
+    }
 };
 
 export default new ManagementDataService();

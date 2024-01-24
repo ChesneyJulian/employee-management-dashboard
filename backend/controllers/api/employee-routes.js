@@ -42,21 +42,20 @@ router.get('/all', async (req, res) => {
     }
 });
 
-// get single employee data
-router.get('/', async (req, res) => {
+// get single employees projects
+router.post('/your-projects', async (req, res) => {
     try {
-        const employeeData = await Employee.findByPk({ include: 
-            [{
-                model: Department
-            },
+        console.log('finding employee projects', req);
+        const employeeData = await Employee.findByPk(req.body.id, 
             {
-                model: Projects
-            }]
+            include: [ {model: Projects, attributes: [ 'title', 'description' ]}],
             });
             if (employeeData) {
-                res.status(200).json(employeeData);
+                console.log(employeeData);
+                return res.status(200).json(employeeData);
             }
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });

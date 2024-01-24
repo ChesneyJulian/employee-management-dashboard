@@ -1,17 +1,11 @@
 <script setup>
 import navbar from '../components/Navigation.vue'
-data () ({
-  methods: {
-    getInfo() {
-      
-    }
-  }
-})
+import projectTable from '../components/ProjectTable.vue'
 </script>
 
 <template>
   <section>
     <navbar />
-    <h2>These are your projects</h2>
+    <projectTable />
   </section>
 </template>

@@ -1,37 +1,6 @@
-
-<template>
-  <v-card>
-    <v-layout>
-      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
-
-      <v-app-bar
-        color="primary"
-        prominent
-      >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-        <v-toolbar-title>My files</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
-        <v-btn variant="text" icon="mdi-home"></v-btn>
-
-        <v-btn variant="text" icon="mdi-logout"></v-btn>
-      </v-app-bar>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        location="top"
-        temporary
-      >
-        <v-list
-          :items="items"
-        ></v-list>
-      </v-navigation-drawer>
-    </v-layout>
-  </v-card>
-</template>
 <script>
+import router from '@/router';
+import AuthServices from '../services/auth'
   export default {
     name: 'navbar',
     data: () => ({
@@ -56,14 +25,53 @@
         },
       ],
     }),
-
     watch: {
       group () {
         this.drawer = false
       },
     },
+    methods: {
+      async logout() {
+        AuthServices.destroyToken();
+        router.push({ name: 'home' });
+      }
+    },
   }
 </script>
+
+<template>
+  <v-card>
+    <v-layout>
+      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
+
+      <v-app-bar
+        color="primary"
+        prominent
+      >
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title>My files</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn variant="text" icon="mdi-home" @click="router.push({ name: 'dashboard'})"></v-btn>
+
+        <v-btn variant="text" icon="mdi-logout" @click="logout()"></v-btn>
+      </v-app-bar>
+
+      <v-navigation-drawer
+        v-model="drawer"
+        location="top"
+        temporary
+      >
+        <v-list
+          :items="items"
+        ></v-list>
+      </v-navigation-drawer>
+    </v-layout>
+  </v-card>
+</template>
+
 
 <style scoped>
 

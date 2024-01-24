@@ -17,12 +17,8 @@ export default {
   methods: {
     async login(email, password) {
       console.log(email, password);
-      const employeeData = await ManagementDataService.employeeLogin(email, password);
-      console.log(employeeData);
-      const validated = await AuthService.checkToken();
-      if (validated === true) {
+      await ManagementDataService.employeeLogin(email, password);
         router.push({ name: 'dashboard' });
-      }
     }
   }
 }

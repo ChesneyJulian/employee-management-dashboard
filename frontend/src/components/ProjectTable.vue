@@ -1,6 +1,5 @@
 <template>
-    <p @click="getInfo()">Get info</p>
-    <v-data-table :items="consoles">
+    <v-data-table :items="projects">
       <template v-slot:item.exclusive="{ item }">
         <v-checkbox
           v-model="item.exclusive"
@@ -12,21 +11,19 @@
   <script>
   import ManagementDataService from '../services/managementSystem'
     export default {
-      name:'projectTable',
-      data: () => ({
-        
-      }),
-      methods: {
-        async getInfo() {
-            const employeeId = this.$store.state.employeeId;
-            console.log('employeeId ', employeeId);
-            const projectData = await ManagementDataService.fetchProjects(employeeId); 
-            console.log(projectData);
-        }
-    },
+    name:'projectTable',
     async beforeCreate() {
-
-        }
+        const employeeId = this.$store.state.employeeId;
+            const projectData = await ManagementDataService.fetchProjects(employeeId); 
+            projectData.data.projects.map((project) => {
+                this.projects.push({title: project.title, description: project.description, 'Tasks Available': project.tasks.length})
+            });
+        },
+    data: () => ({
+        projects:[]
+    }),
+    methods: {},
+    
 
     }
   </script>

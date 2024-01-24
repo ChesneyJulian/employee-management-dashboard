@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Employee, Department, Projects } = require('../../models')
+const { Employee, Department, Projects, Tasks } = require('../../models')
 const { signToken } = require('../../utils/auth');
 // create new employee data
 router.post('/create', async (req, res) => {
@@ -45,13 +45,11 @@ router.get('/all', async (req, res) => {
 // get single employees projects
 router.post('/your-projects', async (req, res) => {
     try {
-        console.log('finding employee projects', req);
         const employeeData = await Employee.findByPk(req.body.id, 
             {
-            include: [ {model: Projects, attributes: [ 'title', 'description' ]}],
+            include: [ {model: Projects, attributes: [ 'title', 'description'], include: [ Tasks]}],
             });
             if (employeeData) {
-                console.log(employeeData);
                 return res.status(200).json(employeeData);
             }
     } catch (err) {

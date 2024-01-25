@@ -1,46 +1,43 @@
 <script>
 import ManagementDataService from '../services/managementSystem'
-import TaskForm from './TaskForm.vue'
+import EditTaskForm from './EditTaskForm.vue';
+import TaskForm from './TaskForm.vue';
 export default {
     name: 'projectDetails',
     components: {
-        TaskForm
-    },
+    EditTaskForm,
+    TaskForm
+},
     mounted(){
         this.getData();
     },
     data(){
         return {
-
             project: {
                 title: '',
                 description: '',
             },
+            projectId: null,
             tasks: []
         }
     },
     methods: {
         async getData(){
             const path = location.pathname.split('')
-            const projectId = path[path.length - 1]
-            const projectDetails = await ManagementDataService.fetchSingleProject(projectId);
+            this.projectId = parseInt(path[path.length - 1])
+            const projectDetails = await ManagementDataService.fetchSingleProject(this.projectId);
             this.project.title = projectDetails.data.title
             this.project.description = projectDetails.data.description
             projectDetails.data.tasks.map((task) => {
                 this.tasks.push({
-                    task: task.title, 
+                    tasks: task.title, 
                     description: task.description,
                     started: task.inProgress,
                     completed: task.completed,
                     edit: task.id
                 })
             })
-            console.log('project ', this.project);
-            console.log('tasks ', this.tasks);
         },
-        async editTask(taskId){
-            console.log(taskId);
-        }
     }
 }
 </script>
@@ -68,17 +65,18 @@ export default {
                 ></v-checkbox>
             </template>
             <template v-slot:item.edit="{ item }">
-                <TaskForm></TaskForm>
+              <EditTaskForm :taskId="item.edit" :priorDescription="item.description" :priorStarted="item.started" :priorCompleted="item.completed"/>
             </template>
             
         </v-data-table>
     </v-card>
-
+    <TaskForm :projectId="projectId"/>
 </template>
 
 <style scoped>
-.v-data-table{
+.v-card{
     width: 80vw;
+    margin-bottom: 44px;
 }
 
 </style>

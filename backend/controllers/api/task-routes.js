@@ -7,7 +7,8 @@ router.post('/create', async (req, res) => {
             title: req.body.title,
             description: req.body.description,
             inProgress: req.body.inProgress,
-            parentProject: req.body.project
+            completed: req.body.completed,
+            parentProject: req.body.projectId
         });
 
         if (newTask) {

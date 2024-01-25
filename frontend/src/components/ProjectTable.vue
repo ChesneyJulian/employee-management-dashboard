@@ -6,11 +6,9 @@ import ManagementDataService from '../services/managementSystem'
   async beforeCreate() {
       const employeeId = this.$store.state.employeeId;
           const projectData = await ManagementDataService.fetchProjects(employeeId); 
-          console.log(projectData);
           projectData.data.projects.map((project) => {
               this.projects.push({title: project.title, description: project.description, 'Tasks Available': project.tasks.length, details: project.id})
             });
-            console.log(this.projects);
       },
   data: () => ({
     projects:[],
@@ -24,6 +22,10 @@ import ManagementDataService from '../services/managementSystem'
 </script>
 <template>
   <v-card elevation="8">
+    <template v-slot:title class="text-h4 font-weight-bold">
+            Your Projects
+        </template >
+        <v-divider :thickness="8" ></v-divider>
     <v-data-table :items="projects">
       <template v-slot:item.details="{ item }">
         <v-btn density="compact" @click="toDetails(item.details)">View</v-btn>
@@ -33,8 +35,9 @@ import ManagementDataService from '../services/managementSystem'
 </template>
 
 <style scoped>
-section {
-  width: 75vw;
+.v-card{
+  margin-bottom: 44px;
+  width: 80vw;
 }
 
 </style>

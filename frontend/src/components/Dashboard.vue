@@ -44,7 +44,6 @@ import router from '../router/index'
 <template>
   <v-container class="mx-auto">
     <v-row dense>
-      <!-- <h1>{{ console.log(this.props) }}</h1> -->
       <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
         <v-hover v-slot="{ isHovering, props }">
           <v-card 

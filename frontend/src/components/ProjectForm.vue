@@ -3,7 +3,6 @@
     export default {
         name: 'projectForm',
         mounted(){
-            console.log('mounted');
             this.getEmployeeOptions();
         },
         data(){
@@ -21,12 +20,10 @@
         methods: {
             async addProjectData(title, description, selectedEmployees) {
                 const data = await ManagementDataService.createProject(title, description, selectedEmployees);
-                console.log(data);
                 location.reload();
             },
             async getEmployeeOptions(){
                 const data = await ManagementDataService.fetchEmployees();
-                console.log(data.data);
                 const condensedData = data.data.map((employee) => {
                     return {
                         title: `${employee.firstName} ${employee.lastName}`,

@@ -34,8 +34,12 @@ class ManagementDataService {
 
     updateTaskData = async (id, description, inProgress, completed) => {
         const updatedTaskData = await http.put("/api/tasks/edit", {id, description, inProgress, completed});
-        console.log(updatedTaskData);
         return updatedTaskData;
+    }
+
+    createTask = async (title, description, inProgress, completed, projectId) => {
+        const newTaskData = await http.post("/api/tasks/create", {title, description, inProgress, completed, projectId});
+        return newTaskData;
     }
 };
 

@@ -19,7 +19,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/edit', async (req, res) => {
     try {
         const updatedData = await Tasks.update({
             description: req.body.description,
@@ -28,7 +28,7 @@ router.put('/:id', async (req, res) => {
         }, 
         {
             where: {
-                id: req.params.id
+                id: req.body.id
             }
         });
         if (updatedData) {

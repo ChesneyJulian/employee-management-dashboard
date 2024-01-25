@@ -47,7 +47,7 @@ router.post('/your-projects', async (req, res) => {
     try {
         const employeeData = await Employee.findByPk(req.body.id, 
             {
-            include: [ {model: Projects, attributes: [ 'title', 'description'], include: [ Tasks]}],
+            include: [ {model: Projects, attributes: [ 'title', 'description', 'id'], include: [ Tasks]}],
             });
             if (employeeData) {
                 return res.status(200).json(employeeData);

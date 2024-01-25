@@ -1,5 +1,5 @@
 <script>
-import { RouterView } from 'vue-router'
+import { RouterView, RouterLink } from 'vue-router'
 import AuthServices from './services/auth'
 // import router from './router';
 // import ManagementDataService from './services/managementSystem'

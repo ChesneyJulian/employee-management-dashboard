@@ -33,10 +33,10 @@ import AuthServices from '../services/auth'
     methods: {
       async logout() {
         AuthServices.destroyToken();
-        router.push({ name: 'home' });
+        router.replace({ name: 'home'});
       },
       toDashboard() {
-        router.push({ path: `dashboard/${this.$store.state.employeeId}` });
+        router.replace({ path: `/dashboard/${this.$store.state.employeeId}`});
       }
     },
   }

@@ -42,6 +42,24 @@ router.get('/all', async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    try {
+        const singleProjectData = await Projects.findByPk(req.body.projectId, {
+            include: [
+                {
+                    model: Tasks
+                }
+            ]
+        });
+        if (singleProjectData) {
+            res.status(200).json(singleProjectData);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
 
 
 module.exports = router;

@@ -7,7 +7,16 @@ import projectForm from '../components/ProjectForm.vue'
 <template>
   <section>
     <navbar />
-    <projectForm /> 
     <projectTable />
+    <projectForm /> 
   </section>
 </template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+ justify-content: space-evenly;
+}
+</style>

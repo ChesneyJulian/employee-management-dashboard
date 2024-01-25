@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Projects from '../views/Projects.vue'
+import ProjectDetails from '../views/ProjectDetails.vue'
 import Timecard from '../views/Timecard.vue'
 import Departments from '../views/Departments.vue'
 import PersonalInfo from '../views/PersonalInfo.vue'
@@ -25,6 +26,12 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: Projects
+    },
+    {
+      path: '/project-details/:projectId',
+      name: 'projectDetails',
+      component: ProjectDetails,
+      props: true
     },
     {
       path: '/timecard',

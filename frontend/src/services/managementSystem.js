@@ -17,14 +17,25 @@ class ManagementDataService {
         return employeeProjectData;
     }
 
+    fetchEmployees = async () => {
+        const employeeData = await http.get("/api/employee/all");
+        return employeeData;
+    }
+
     createProject = async (title, description, employeeIds) => {
         const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});
         return newProjectData;
     }
 
-    fetchEmployees = async () => {
-        const employeeData = await http.get("/api/employee/all");
-        return employeeData;
+    fetchSingleProject = async (projectId) => {
+        const projectData = await http.post("/api/projects/", {"projectId": projectId});
+        return projectData;
+    }
+
+    updateTaskData = async (id, description, inProgress, completed) => {
+        const updatedTaskData = await http.put("/api/tasks/edit", {id, description, inProgress, completed});
+        console.log(updatedTaskData);
+        return updatedTaskData;
     }
 };
 

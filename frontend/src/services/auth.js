@@ -3,7 +3,6 @@ import { jwtDecode } from 'jwt-decode';
 class AuthService {
     saveToken(token) {
         localStorage.setItem('id_token', token);
-        console.log("saving token")
     };
 
     destroyToken() {
@@ -31,6 +30,15 @@ class AuthService {
         const token = this.getToken();
         return !!token && !this.tokenExpired(token);
     };
+
+    decodeToken() {
+        const token = this.getToken();
+        if (token) {
+            return jwtDecode(token);
+        } else {
+            return false;
+        }
+    }
 };
 
 export default new AuthService();

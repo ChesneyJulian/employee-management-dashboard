@@ -1,22 +1,23 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import AuthServices from './services/auth'
+// import router from './router';
 // import ManagementDataService from './services/managementSystem'
 export default {
+  mounted(){
+    const userInfo = AuthServices.decodeToken();
+    if (userInfo) {
+      this.$store.commit({
+        type: 'assign',
+        data: userInfo.data
+      })
+    };
+  },
   name: "app",
   data() {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-    // async getDepartments () {
-    //   const departmentData = await ManagementDataService.getAllDepartments();
-    //   const dataLength = departmentData.data.length;
-    //   for (let i = 0; i < dataLength; i++) {
-    //     console.log(departmentData.data[i]);
-    //   }
-    // }
-  }
+  methods: {}
 }
 
 </script>

@@ -16,6 +16,16 @@ class ManagementDataService {
         const employeeProjectData = await http.post("/api/employee/your-projects", { "id": id });
         return employeeProjectData;
     }
+
+    createProject = async (title, description, employeeIds) => {
+        const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});
+        return newProjectData;
+    }
+
+    fetchEmployees = async () => {
+        const employeeData = await http.get("/api/employee/all");
+        return employeeData;
+    }
 };
 
 export default new ManagementDataService();

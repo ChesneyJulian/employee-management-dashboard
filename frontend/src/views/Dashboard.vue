@@ -1,6 +1,7 @@
 <script setup>
 import dashboard from '../components/Dashboard.vue'
 import navbar from '../components/Navigation.vue'
+
 </script>
 
 <template>

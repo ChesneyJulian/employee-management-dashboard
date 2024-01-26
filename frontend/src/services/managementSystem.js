@@ -12,6 +12,16 @@ class ManagementDataService {
         return employeeData.data;
     }
 
+    singleEmployeeInfo = async (id) => {
+        const employeeData = await http.post("/api/employee/", {'id': id});
+        return employeeData;
+    }
+
+    editEmployeeInfo = async (employeeId, phoneNumber, email) => {
+        const updatedData = await http.put("/api/employee/edit", {employeeId, phoneNumber, email});
+        return updatedData;
+    }
+
     fetchProjects = async (id) => {
         const employeeProjectData = await http.post("/api/employee/your-projects", { "id": id });
         return employeeProjectData;

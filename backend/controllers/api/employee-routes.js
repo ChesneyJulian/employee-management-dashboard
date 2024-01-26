@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Employee, Department, Projects, Tasks } = require('../../models')
+const { Employee, Department, Projects, Tasks, Location } = require('../../models')
 const { signToken } = require('../../utils/auth');
 // create new employee data
 router.post('/create', async (req, res) => {
@@ -9,7 +9,8 @@ router.post('/create', async (req, res) => {
             lastName: req.body.lastName,
             departmentId: req.body.departmentId,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            phoneNumber: req.body.phoneNumber
         });
 
         if (newEmployee) {
@@ -53,10 +54,25 @@ router.post('/your-projects', async (req, res) => {
                 return res.status(200).json(employeeData);
             }
     } catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
+
+router.post('/', async (req, res) => {
+    try {
+        const employeeData = await Employee.findByPk(req.body.id, {
+            include: [{
+                model: Department, include: [{ model: Location }]
+            }]
+        });
+        if (employeeData) {
+            return res.status(200).json(employeeData);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 router.post('/login', async (req, res) => {
     try {
@@ -80,5 +96,25 @@ router.post('/login', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+router.put('/edit', async (req, res) => {
+    try {
+        const updatedData = await Employee.update({
+            phoneNumber: req.body.phoneNumber,
+            email: req.body.email
+        }, 
+        {
+            where: {
+                id: req.body.employeeId
+            }
+        })
+        if (updatedData) {
+            res.status(200).json(updatedData);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;

@@ -28,8 +28,16 @@ Employee.init(
        email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
-            isEmail: true
+            isEmail: true,
+        }
+       },
+       phoneNumber: {
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {
+            is: /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/g
         }
        },
        password: {

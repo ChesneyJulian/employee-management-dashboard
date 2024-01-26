@@ -1,9 +1,12 @@
 <script>
 import { RouterView, RouterLink } from 'vue-router'
 import AuthServices from './services/auth'
-// import router from './router';
+import navbar from './components/Navigation.vue'
 // import ManagementDataService from './services/managementSystem'
 export default {
+  components: {
+    navbar
+  },
   mounted(){
     const userInfo = AuthServices.decodeToken();
     if (userInfo) {
@@ -12,6 +15,7 @@ export default {
         data: userInfo.data
       })
     };
+    console.log(this.$route.name);
   },
   name: "app",
   data() {
@@ -23,7 +27,8 @@ export default {
 </script>
 
 <template>
-  <RouterView />
+    <navbar v-if="this.$route.name != 'home'"/>
+    <RouterView  />
 </template>
 
 <style scoped>

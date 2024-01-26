@@ -8,28 +8,28 @@ import router from '../router/index'
           title: 'Your info',
           description: 'View personal info',
           flex: 12,
-          backgroundColor: 'rgba(246, 194, 82, 0.8)',
+          backgroundColor: '#FFAB40',
           path: {name: 'info'}
         },
         {
           title: 'Your Projects',
           description: 'View your current projects',
           flex: 6,
-          backgroundColor: 'rgba(39, 135, 245, 0.62)',
+          backgroundColor: '#9575CD',
           path: { name: 'projects'}
         },
         {
           title: 'Department Info',
           description: 'View info about your department',
           flex: 6,
-          backgroundColor: 'rgba(2, 187, 64, 0.48)',
+          backgroundColor: '#E57373',
           path: {name: 'department'}
         },
         {
           title: 'Timecards',
           description: 'View and edit your timecards',
           flex: 12,
-          backgroundColor: 'rgba(234, 0, 46, 0.52)',
+          backgroundColor: '#4DB6AC',
           path: {name: 'timecard'}
         }
       ],

@@ -6,24 +6,6 @@ import AuthServices from '../services/auth'
     data: () => ({
       drawer: false,
       group: null,
-      items: [
-        {
-          title: 'Foo',
-          value: 'foo',
-        },
-        {
-          title: 'Bar',
-          value: 'bar',
-        },
-        {
-          title: 'Fizz',
-          value: 'fizz',
-        },
-        {
-          title: 'Buzz',
-          value: 'buzz',
-        },
-      ],
     }),
     watch: {
       group () {
@@ -43,39 +25,26 @@ import AuthServices from '../services/auth'
 </script>
 
 <template>
-  <v-card>
+  <section>
+  <v-card elevation="10">
     <v-layout>
-      <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
-
-      <v-app-bar
-        color="primary"
+      <v-toolbar
+        class="py-2 bg-blue-darken-2"
         prominent
       >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
         <v-toolbar-title>{{this.$store.state.name}} - Employee Dashboard</v-toolbar-title>
-
         <v-spacer></v-spacer>
-
         <v-btn variant="text" icon="mdi-home" @click="toDashboard()"></v-btn>
-
         <v-btn variant="text" icon="mdi-logout" @click="logout()"></v-btn>
-      </v-app-bar>
-
-      <v-navigation-drawer
-        v-model="drawer"
-        location="top"
-        temporary
-      >
-        <v-list
-          :items="items"
-        ></v-list>
-      </v-navigation-drawer>
+      </v-toolbar>
     </v-layout>
   </v-card>
+</section>
 </template>
 
 
 <style scoped>
-
+section {
+  margin-bottom: 24px;
+}
 </style>

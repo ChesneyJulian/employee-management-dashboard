@@ -11,7 +11,6 @@ import navbar from '../components/Navigation.vue'
 
 <template>
   <main>
-    <navbar />
     <h2>View and edit your timecards</h2>
   </main>
 </template>

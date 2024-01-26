@@ -6,6 +6,11 @@ class ManagementDataService {
         return departmentData;
     }
 
+    getAllDepartments = async () => {
+        const departmentData = await http.get("/api/department/all");
+        return departmentData;
+    }
+
     employeeLogin = async (email, password) => {
         const employeeData = await http.post("/api/employee/login", { email, password });
         AuthService.saveToken(employeeData.data.token);

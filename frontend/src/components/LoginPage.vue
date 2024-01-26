@@ -29,9 +29,9 @@ export default {
 </script>
 
 <template>
-<header>
-    <h1>Employee Management System</h1>
-    <p>Please log in with your employee credentials to continue.</p>
+<header class="rounded-lg bg-blue-darken-2 text-white">
+    <h1 class="mb-2">Employee Management System</h1>
+    <p class="mb-2">Please log in with your employee credentials to continue.</p>
     <v-form @submit.prevent>
       <v-responsive class="mx-auto mb-4" min-width="344">
         <v-text-field variant="solo" hide-details="auto" label="Email address" v-model="email" :rules="[required]" placeholder="johndoe@gmail.com" type="email"></v-text-field>
@@ -39,7 +39,7 @@ export default {
       <v-responsive class="mx-auto" min-width="344">
         <v-text-field variant="solo" v-model="password" :rules="[required]" label="Password" type="password"></v-text-field>
       </v-responsive>
-      <v-btn :type="'submit'" @click="login(email, password)" >
+      <v-btn :type="'submit'" @click="login(email, password)" class="mt-2" >
         Login
       </v-btn>
     </v-form>
@@ -47,24 +47,17 @@ export default {
 </template>
 
 <style scoped>
-header {
+ header {
 padding: 28px;
-border-radius: 12px;;
-background-color: rgba(39, 135, 245, 0.62);
-color: #FFFFFF;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
 }
 h1 {
-line-height: 3rem;
 margin-bottom: 4px;
 font-weight: bolder;
 font-size: 2rem;
-}
-p {
-  margin-bottom: 4px;
 }
 form {
 padding: 16px;
@@ -72,7 +65,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-}
+} 
 
 
 </style> 

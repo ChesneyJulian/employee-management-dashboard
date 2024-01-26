@@ -37,7 +37,7 @@
         >
           <template v-slot:activator="{ props }">
             <v-btn
-              color="primary"
+              class="bg-blue-darken-2"
               v-bind="props"
             >
               Add Task

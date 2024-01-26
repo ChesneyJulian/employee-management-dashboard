@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
 
 router.get('/all', async (req, res) => {
     try {
-        const departmentData = await Department.findAll({ include: Location })
+        const departmentData = await Department.findAll({ include: [{ model: Location }, { model: Employee }] })
         if (departmentData) {
             console.log(departmentData);
             return res.status(200).json( departmentData );

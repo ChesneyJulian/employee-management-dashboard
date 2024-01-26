@@ -1,11 +1,19 @@
 <script setup>
-import navbar from '../components/Navigation.vue'
 import projectDetails from '../components/ProjectDetails.vue'
 </script>
 
 <template>
   <section>
-    <navbar />
     <projectDetails />
   </section>
 </template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+</style>

@@ -1,16 +1,9 @@
 <script setup>
-import navbar from '../components/Navigation.vue'
-// export default {
-//   data () {
-//     return {
-//         name: 'timecard'
-//     }
-//   }
-// }
+import Timecard from '../components/Timecard.vue';
 </script>
 
 <template>
-  <main>
-    <h2>View and edit your timecards</h2>
-  </main>
+  <section>
+    <Timecard />
+  </section>
 </template>

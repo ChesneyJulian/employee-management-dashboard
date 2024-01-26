@@ -13,14 +13,14 @@ import router from '../router/index'
         },
         {
           title: 'Your Projects',
-          description: 'View your current projects',
+          description: 'View your projects',
           flex: 6,
           backgroundColor: '#9575CD',
           path: { name: 'projects'}
         },
         {
           title: 'Department Info',
-          description: 'View info about your department',
+          description: 'View departments',
           flex: 6,
           backgroundColor: '#E57373',
           path: {name: 'department'}

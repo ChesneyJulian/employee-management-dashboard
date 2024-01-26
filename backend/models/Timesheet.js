@@ -11,16 +11,12 @@ Timesheet.init(
             autoIncrement: true,
             allowNull: false
         },
-        startDate: {
+        date: {
             type: DataTypes.DATEONLY,
-            allowNull: false
-        },
-        endDate: {
-            type: DataTypes.DATEONLY,
-            allowNull: false
+            default: new Date()
         },
         hoursWorked: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: false
         },
 //  CREATE RELATIONSHIP TO EMPLOYEE 

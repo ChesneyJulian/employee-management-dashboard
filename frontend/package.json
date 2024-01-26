@@ -9,8 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@date-io/dayjs": "^3.0.0",
     "axios": "^1.6.5",
+    "dayjs": "^1.11.10",
     "jwt-decode": "^4.0.0",
+    "luxon": "^3.4.4",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
     "vuex": "^4.0.2"

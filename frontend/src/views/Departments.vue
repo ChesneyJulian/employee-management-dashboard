@@ -1,17 +1,11 @@
 <script setup>
 import navbar from '../components/Navigation.vue'
-// export default {
-  // data () {
-    // return {
-        // name: 'department'
-    // }
-  // }
-// }
+import departments from '../components/Departments.vue'
 </script>
 
 <template>
   <main>
     <navbar />
-    <h2>Some Department Info for you</h2>
+    <departments />
   </main>
 </template>

@@ -2,6 +2,7 @@
 import ManagementDataService from '../services/managementSystem'
 import EditTaskForm from './EditTaskForm.vue';
 import TaskForm from './TaskForm.vue';
+import router from '../router/index'
 export default {
     name: 'projectDetails',
     components: {
@@ -23,6 +24,9 @@ export default {
         }
     },
     methods: {
+        goToEmployee(id){
+            router.replace({path: `/info/${id}`})
+        },
         async getData(){
             const path = location.pathname.split('')
             this.projectId = parseInt(path[path.length - 1])
@@ -43,7 +47,8 @@ export default {
             projectDetails.data.employees.map((employee) => {
                 this.employees.push({
                     name: `${employee.firstName} ${employee.lastName}`,
-                    department: employee.department.title
+                    department: employee.department.title,
+                    id: employee.id
                 })
             })
             console.log(this.employees);
@@ -85,8 +90,9 @@ export default {
                 >
                 <template v-slot:text>
                     <v-list lines="two">
-                        <v-list-item
-                            v-for="employee in employees"
+                        <v-list-item 
+                        v-for="employee in employees"
+                            @click="goToEmployee(employee.id)"
                             :title="employee.name"
                             :subtitle="employee.department"
                         ></v-list-item>

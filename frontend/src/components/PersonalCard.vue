@@ -7,7 +7,7 @@ export default {
     data() {
         return {
             dialog: false,
-            employeeId: AuthServices.decodeToken().data.id,
+            employeeId: null, 
             name: '',
             email: '',
             department: '',
@@ -16,6 +16,8 @@ export default {
         }
     },
     async mounted(){
+        const path = location.pathname.split('')
+        this.employeeId = parseInt(path[path.length - 1])
         const employeeData = await ManagementDataService.singleEmployeeInfo(this.employeeId);
         this.name = (`${employeeData.data.firstName} ${employeeData.data.lastName}`)
         this.email = employeeData.data.email;
@@ -38,8 +40,8 @@ export default {
             <template v-slot:title class="font-weight-bold">{{ name }}</template>
             <v-divider :thickness="8" ></v-divider>
             <v-list lines="one" class="ml-8">
-                <v-list-item><strong class="mr-2">Email:</strong> {{ email }}</v-list-item>
-                <v-list-item><strong class="mr-2">Phone:</strong> {{ phoneNumber }}</v-list-item>
+                <v-list-item><strong class="mr-2">Email:</strong><a v-bind:href="'mailto:' + email">{{ email }}</a></v-list-item>
+                <v-list-item><strong class="mr-2">Phone:</strong><a v-bind:href="'tel:' + phoneNumber">{{ phoneNumber }}</a></v-list-item>
                 <v-list-item><strong class="mr-2">Department:</strong> {{ department }}</v-list-item>
                 <v-list-item><strong class="mr-2">Office location:</strong> {{ location }}</v-list-item>
             </v-list>
@@ -53,6 +55,7 @@ export default {
         >
           <template v-slot:activator="{ props }">
             <v-btn
+              v-if="employeeId === this.$store.state.employeeId"
               color="primary"
               v-bind="props"
             >
@@ -96,6 +99,8 @@ export default {
 .v-card{
     width: 80vw;
     margin-bottom: 44px;
-    /* line-height: 2em; */
+}
+a{
+  color: black;
 }
 </style>

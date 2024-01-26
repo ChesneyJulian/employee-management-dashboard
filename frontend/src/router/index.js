@@ -44,9 +44,10 @@ const router = createRouter({
       component: Departments
     },
     {
-      path: '/info',
+      path: '/info/:id',
       name: 'info',
-      component: PersonalInfo
+      component: PersonalInfo,
+      props: true,
     },
   ]
 })

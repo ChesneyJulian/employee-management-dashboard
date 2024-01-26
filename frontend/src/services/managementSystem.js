@@ -1,8 +1,8 @@
 import http from '../http-common';
 import AuthService from './auth'
 class ManagementDataService {
-    getAllDepartments = async () => {
-        const departmentData = await http.get("/api/department/all");
+    getYourDepartment = async (departmentId) => {
+        const departmentData = await http.post("/api/department/your-department", { departmentId });
         return departmentData;
     }
 

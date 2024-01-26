@@ -18,7 +18,8 @@ export default {
                 description: '',
             },
             projectId: null,
-            tasks: []
+            tasks: [],
+            employees: []
         }
     },
     methods: {
@@ -26,6 +27,7 @@ export default {
             const path = location.pathname.split('')
             this.projectId = parseInt(path[path.length - 1])
             const projectDetails = await ManagementDataService.fetchSingleProject(this.projectId);
+            console.log(projectDetails);
             this.project.title = projectDetails.data.title
             this.project.description = projectDetails.data.description
             projectDetails.data.tasks.map((task) => {
@@ -37,6 +39,14 @@ export default {
                     edit: task.id
                 })
             })
+            console.log('employees ',projectDetails.data.employees);
+            projectDetails.data.employees.map((employee) => {
+                this.employees.push({
+                    name: `${employee.firstName} ${employee.lastName}`,
+                    department: employee.department.title
+                })
+            })
+            console.log(this.employees);
         },
     }
 }
@@ -67,9 +77,25 @@ export default {
             <template v-slot:item.edit="{ item }">
               <EditTaskForm :taskId="item.edit" :priorDescription="item.description" :priorStarted="item.started" :priorCompleted="item.completed"/>
             </template>
-            
         </v-data-table>
+        <v-divider :thickness="8" ></v-divider>
+        <v-expansion-panels>
+            <v-expansion-panel
+                title="Employees"
+                >
+                <template v-slot:text>
+                    <v-list lines="two">
+                        <v-list-item
+                            v-for="employee in employees"
+                            :title="employee.name"
+                            :subtitle="employee.department"
+                        ></v-list-item>
+                    </v-list>
+                </template>
+            </v-expansion-panel>
+        </v-expansion-panels>
     </v-card>
+
     <TaskForm :projectId="projectId"/>
 </template>
 
@@ -78,5 +104,8 @@ export default {
     width: 80vw;
     margin-bottom: 44px;
 }
+
+
+
 
 </style>

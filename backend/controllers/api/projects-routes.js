@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Projects, EmployeeProjects, Employee, Tasks } = require('../../models');
+const { Projects, EmployeeProjects, Employee, Tasks, Department } = require('../../models');
 const { authMiddleware } = require('../../utils/auth');
 
 router.post('/create', async (req, res) => {
@@ -48,6 +48,9 @@ router.post('/', async (req, res) => {
             include: [
                 {
                     model: Tasks
+                },
+                {
+                    model: Employee, include: [{ model: Department}]
                 }
             ]
         });

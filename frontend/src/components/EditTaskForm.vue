@@ -27,7 +27,7 @@
 </script>
 
 <template class="d-flex align-center">
-      <v-btn density="compact" @click="dialog=true">Edit</v-btn>
+      <v-btn class="bg-blue-darken-2" density="compact" @click="dialog=true">Edit</v-btn>
     <div>
       <v-row justify="center">
         <v-dialog

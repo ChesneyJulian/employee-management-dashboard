@@ -25,15 +25,17 @@ const store = createStore({
       employeeId: null,
       name: '',
       departmentId: null,
-      email: ''
+      email: '',
+      admin: null
     }
   },
   mutations: {
     assign (state, { data }) {
       state.employeeId = data.id,
-      state.name = data.firstName;
+      state.name = data.firstName,
       state.departmentId = data.departmentId,
-      state.email = data.email
+      state.email = data.email,
+      state.admin = data.admin
     }
   }
 })

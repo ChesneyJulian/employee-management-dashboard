@@ -48,6 +48,10 @@ Employee.init(
             is: /^[0-9a-z]{8,24}$/i
         }
        },
+       admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+       },
        departmentId: {
         type: DataTypes.INTEGER,
         allowNull: false,

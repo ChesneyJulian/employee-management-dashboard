@@ -10,7 +10,8 @@ router.post('/create', async (req, res) => {
             departmentId: req.body.departmentId,
             email: req.body.email,
             password: req.body.password,
-            phoneNumber: req.body.phoneNumber
+            phoneNumber: req.body.phoneNumber,
+            admin: req.body.admin
         });
 
         if (newEmployee) {

@@ -48,8 +48,6 @@ export default {
                     })
                 });
             }
-           
-            console.log(this.allDepartments);
         }
     }
 }
@@ -106,10 +104,10 @@ export default {
         </div>
         <div class="mb-16">
             <v-row justify="center">
-                <v-btn v-if="showDepartments === false" class="bg-blue-darken-2" v-bind="props" @click="getAllDepartments()">
+                <v-btn v-if="showDepartments === false" class="bg-blue-darken-2" @click="getAllDepartments()">
                     View All Departments
                 </v-btn>
-                <v-btn v-else class="bg-blue-darken-2" v-bind="props" @click="showDepartments = false">
+                <v-btn v-else class="bg-blue-darken-2" @click="showDepartments = false">
                     Hide Other Departments
                 </v-btn>
             </v-row>

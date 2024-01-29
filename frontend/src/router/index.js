@@ -6,6 +6,8 @@ import ProjectDetails from '../views/ProjectDetails.vue'
 import Timecard from '../views/Timecard.vue'
 import Departments from '../views/Departments.vue'
 import PersonalInfo from '../views/PersonalInfo.vue'
+import Admin from '../views/Admin.vue'
+
 import AuthServices from '../services/auth'
 
 const router = createRouter({
@@ -49,18 +51,32 @@ const router = createRouter({
       component: PersonalInfo,
       props: true,
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin
+    }
   ]
 })
 // check token authentication before routing anywhere besides login page
 router.beforeEach((to, from, next) =>  {
-  let isAuthenticated = AuthServices.checkToken();
-  if (to.name !== 'home' && !isAuthenticated) next({ name: 'home' })
-  else next();
+  const isAuthenticated = AuthServices.checkToken();
+  const adminAccess = isAuthenticated ? AuthServices.decodeToken().data.admin : false; 
+  
+  if (to.name !== 'home' && !isAuthenticated) {
+    next({ name: 'home' }) 
+  } else 
 // if page back tracks to home, destroy token to prevent page forwarding without renewed credentials
   if (isAuthenticated && to.name === 'home') {
     AuthServices.destroyToken();
     next({ name: 'home'});
-  };
+  } else
+
+  if (to.name === 'admin' && !adminAccess) {
+    next({ name: 'home'})
+  } else {
+    next();
+  }
 })
 
 export default router

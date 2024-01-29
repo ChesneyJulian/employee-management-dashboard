@@ -1,10 +1,10 @@
 <script setup>
-import dashboard from '../components/Dashboard.vue'
+import adminPortal from '../components/Admin.vue'
 </script>
 
 <template>
     <section class="mx-auto">
-      <dashboard />
+        <adminPortal />
     </section>
 </template>
 

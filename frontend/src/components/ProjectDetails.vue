@@ -31,7 +31,6 @@ export default {
             const path = location.pathname.split('')
             this.projectId = parseInt(path[path.length - 1])
             const projectDetails = await ManagementDataService.fetchSingleProject(this.projectId);
-            console.log(projectDetails);
             this.project.title = projectDetails.data.title
             this.project.description = projectDetails.data.description
             projectDetails.data.tasks.map((task) => {
@@ -43,7 +42,6 @@ export default {
                     edit: task.id
                 })
             })
-            console.log('employees ',projectDetails.data.employees);
             projectDetails.data.employees.map((employee) => {
                 this.employees.push({
                     name: `${employee.firstName} ${employee.lastName}`,
@@ -51,7 +49,6 @@ export default {
                     id: employee.id
                 })
             })
-            console.log(this.employees);
         },
     }
 }

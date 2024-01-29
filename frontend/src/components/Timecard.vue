@@ -41,10 +41,6 @@ const months = [
 </script>
 
 <template>
-  <section class="d-flex w-100 justify-space-evenly mb-12">
-    <v-btn class="bg-blue-darken-2" v-if="!this.formDisplay" @click="this.formDisplay = true; this.historyDisplay = false">New Timecard</v-btn>
-    <v-btn class="bg-blue-darken-2" v-if="!this.historyDisplay" @click="fetchHistory()">View Past Timecards</v-btn>
-  </section>
   <v-card elevation="8" title="New Time Card" v-if="this.formDisplay">
     <v-divider :thickness="8" ></v-divider>
       <v-container >
@@ -68,7 +64,10 @@ const months = [
     <v-data-table :items="this.timecardHistory">
     </v-data-table>
   </v-card>
-
+  <section class="d-flex w-100 justify-space-evenly mb-12">
+    <v-btn class="bg-blue-darken-2" v-if="!this.formDisplay" @click="this.formDisplay = true; this.historyDisplay = false">New Timecard</v-btn>
+    <v-btn class="bg-blue-darken-2" v-if="!this.historyDisplay" @click="fetchHistory()">View Past Timecards</v-btn>
+  </section>
 </template>
 
 

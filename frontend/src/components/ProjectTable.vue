@@ -28,7 +28,7 @@ import ManagementDataService from '../services/managementSystem'
         <v-divider :thickness="8" ></v-divider>
     <v-data-table :items="projects">
       <template v-slot:item.details="{ item }">
-        <v-btn density="compact" @click="toDetails(item.details)">View</v-btn>
+        <v-btn class="bg-blue-darken-2" density="compact" @click="toDetails(item.details)">View</v-btn>
       </template>
     </v-data-table>
   </v-card>

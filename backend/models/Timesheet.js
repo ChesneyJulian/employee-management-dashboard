@@ -13,7 +13,8 @@ Timesheet.init(
         },
         date: {
             type: DataTypes.DATEONLY,
-            default: new Date()
+            allowNull: false,
+            // unique: true
         },
         hoursWorked: {
             type: DataTypes.FLOAT,
@@ -30,6 +31,11 @@ Timesheet.init(
         }
     },
     {
+        uniqueKeys: {
+            entry_unique: {
+              fields: ['worker', 'date'],
+            },
+          },
         sequelize,
         timestamps: false,
         freezeTableName: true,

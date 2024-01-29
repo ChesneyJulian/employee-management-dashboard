@@ -56,6 +56,16 @@ class ManagementDataService {
         const newTaskData = await http.post("/api/tasks/create", {title, description, inProgress, completed, projectId});
         return newTaskData;
     }
+
+    addTimecard = async (date, hoursWorked, worker) => {
+        const newTimecardData = await http.post("/api/timesheet/create", { date, hoursWorked, worker });
+        return newTimecardData;
+    }
+
+    getTimecards = async (employeeId) => {
+        const timecardData = await http.post("/api/timesheet/", { employeeId });
+        return timecardData;
+    }
 };
 
 export default new ManagementDataService();

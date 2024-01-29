@@ -7,3 +7,13 @@ import Timecard from '../components/Timecard.vue';
     <Timecard />
   </section>
 </template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+</style>

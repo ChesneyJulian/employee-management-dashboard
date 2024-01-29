@@ -4,15 +4,14 @@ const { Timesheet, Employee } = require('../../models')
 router.post('/create', async (req, res) => {
     try {
         const newTimesheet = await Timesheet.create({
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
+            date: req.body.date,
             hoursWorked: req.body.hoursWorked,
             worker: req.body.worker
         });
         if (newTimesheet) {
             res.status(200).json(newTimesheet);
         } else {
-            res.status(404).json('New timesheet not found');
+            res.status(4).json('New timesheet not found');
         }
     } catch (err) {
         console.log(err);
@@ -20,20 +19,20 @@ router.post('/create', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const employeeTimesheetData = await Timesheet.findAll({
             where: {
-                worker: req.params.id
+                worker: req.body.employeeId
             },
-            include: [{ Model: Employee }]
+            order: [['date', 'DESC']],
+            include: [{ model: Employee }]
          });
-         if (employeeTimesheetData.length) {
+         if (employeeTimesheetData) {
             res.status(200).json(employeeTimesheetData);
-         } else {
-            res.status(404).json('No employee timesheets found');
-         }
+         };
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 })

@@ -15,7 +15,6 @@ export default {
         data: userInfo.data
       })
     };
-    console.log(this.$route.name);
   },
   name: "app",
   data() {

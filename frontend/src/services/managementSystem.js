@@ -11,10 +11,30 @@ class ManagementDataService {
         return departmentData;
     }
 
+    createDepartment = async (title, locationId) => {
+        const departmentData = await http.post("/api/department/create", { title, locationId });
+        return departmentData;
+    }
+
+    getLocations = async () => {
+        const locationData = await http.get("/api/location/all");
+        return locationData;
+    }
+
+    createLocation = async (address, employeeParking) => {
+        const locationData = await http.post("/api/location/create", { address, employeeParking });
+        return locationData;
+    }
+
     employeeLogin = async (email, password) => {
         const employeeData = await http.post("/api/employee/login", { email, password });
         AuthService.saveToken(employeeData.data.token);
         return employeeData.data;
+    }
+
+    createEmployee = async (firstName, lastName, departmentId, email, password, phoneNumber, admin) => {
+        const employeeData = await http.post("/api/employee/create", {firstName, lastName, departmentId, email, password, phoneNumber, admin});
+        return employeeData;
     }
 
     singleEmployeeInfo = async (id) => {
@@ -27,15 +47,16 @@ class ManagementDataService {
         return updatedData;
     }
 
+    fetchEmployees = async () => {
+        const employeeData = await http.get("/api/employee/all");
+        return employeeData;
+    }
+
     fetchProjects = async (id) => {
         const employeeProjectData = await http.post("/api/employee/your-projects", { "id": id });
         return employeeProjectData;
     }
 
-    fetchEmployees = async () => {
-        const employeeData = await http.get("/api/employee/all");
-        return employeeData;
-    }
 
     createProject = async (title, description, employeeIds) => {
         const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});

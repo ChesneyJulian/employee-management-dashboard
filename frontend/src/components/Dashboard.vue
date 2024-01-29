@@ -45,7 +45,7 @@ import router from '../router/index'
 <template>
   <v-container class="mx-auto">
     <v-row dense>
-      <v-col cols="6"  v-if="this.admin === true">
+      <v-col cols="12"  v-if="this.admin === true">
         <v-hover v-slot="{ isHovering, props }">
           <v-card
           :elevation="isHovering ? 12 : 2" 

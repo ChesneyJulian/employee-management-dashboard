@@ -12,8 +12,10 @@ import adminPortal from '../components/Admin.vue'
 section {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   min-width: 100vw;
-  align-items: space-between;
+  min-height: 70vh;
+  justify-content: center;
+  align-items: center;
 }
-
 </style>

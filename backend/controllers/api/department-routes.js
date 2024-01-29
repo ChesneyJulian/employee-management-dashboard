@@ -51,4 +51,19 @@ router.post('/your-department', async (req, res) => {
     }
 })
 
+router.post('/delete', async (req, res) => {
+    try {
+        const deletedDepartment = await Department.destroy({
+            where: {
+                id: req.body.id
+            }
+        })
+        if (deletedDepartment) {
+            res.status(200).json(deletedDepartment)
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 module.exports = router;

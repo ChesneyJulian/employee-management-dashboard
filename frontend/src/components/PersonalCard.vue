@@ -1,4 +1,5 @@
 <script>
+import router from '@/router';
 import AuthServices from '../services/auth'
 import ManagementDataService from '../services/managementSystem';
 
@@ -29,6 +30,10 @@ export default {
         async editInfo() {
             const editInfo = await ManagementDataService.editEmployeeInfo(this.employeeId, this.phoneNumber, this.email);
             location.reload();
+        },
+        async deleteInfo() {
+          const deleteEmployee = await ManagementDataService.deleteEmployee(this.employeeId);
+          router.replace({path: `/admin`})
         }
     }
 }
@@ -56,10 +61,17 @@ export default {
         <template v-slot:activator="{ props }">
           <v-btn
             v-if="employeeId === this.$store.state.employeeId"
-            class="bg-blue-darken-2"
+            class="bg-blue-darken-2 mr-4"
             v-bind="props"
           >
             Edit Contact Info
+          </v-btn>
+          <v-btn
+            v-if="this.$store.state.admin === true"
+            class="bg-blue-darken-2 "
+            @click="deleteInfo()"
+          >
+            Delete Employee Account
           </v-btn>
         </template>
         <v-form @submit.prevent="editInfo()" >

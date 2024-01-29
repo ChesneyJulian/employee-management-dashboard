@@ -8,7 +8,7 @@ const months = [
     data () {
       return {
         formDisplay: false,
-        historyDisplay: false,
+        historyDisplay: true,
         dateVal: null,
         hours: null,
         timecardHistory: []

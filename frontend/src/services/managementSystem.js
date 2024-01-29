@@ -16,6 +16,11 @@ class ManagementDataService {
         return departmentData;
     }
 
+    deleteDepartment = async (id) => {
+        const deletedDepartment = await http.post("/api/department/delete", { id });
+        return deletedDepartment;
+    }
+
     getLocations = async () => {
         const locationData = await http.get("/api/location/all");
         return locationData;
@@ -34,6 +39,11 @@ class ManagementDataService {
 
     createEmployee = async (firstName, lastName, departmentId, email, password, phoneNumber, admin) => {
         const employeeData = await http.post("/api/employee/create", {firstName, lastName, departmentId, email, password, phoneNumber, admin});
+        return employeeData;
+    }
+
+    deleteEmployee = async (id) => {
+        const employeeData = await http.post("/api/employee/delete", {id});
         return employeeData;
     }
 
@@ -57,10 +67,19 @@ class ManagementDataService {
         return employeeProjectData;
     }
 
+    fetchAllProjets = async () => {
+        const projectData = await http.get("/api/projects/all");
+        return projectData;
+    }
 
     createProject = async (title, description, employeeIds) => {
         const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});
         return newProjectData;
+    }
+
+    deleteProject = async (id) => {
+        const deletedProject = await http.post("/api/projects/delete", {id});
+        return deletedProject;
     }
 
     fetchSingleProject = async (projectId) => {

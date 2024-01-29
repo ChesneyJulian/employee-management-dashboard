@@ -23,6 +23,23 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.post('/delete', async (req, res) => {
+    try {
+        const employeeData = await Employee.destroy({
+            where: {
+                id: req.body.id
+            }
+        });
+
+        if (employeeData){
+            res.status(200).json(employeeData);
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
 // get all employees
 router.get('/all', async (req, res) => {
     try {

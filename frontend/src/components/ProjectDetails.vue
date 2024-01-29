@@ -50,6 +50,10 @@ export default {
                 })
             })
         },
+        async deleteInfo() {
+          const deleteProject = await ManagementDataService.deleteProject(this.projectId);
+          if (deleteProject) router.replace({path: `/admin`})
+        }
     }
 }
 </script>
@@ -98,8 +102,17 @@ export default {
             </v-expansion-panel>
         </v-expansion-panels>
     </v-card>
+    <section>
+        <TaskForm :projectId="projectId"/>
+        <v-btn
+            v-if="this.$store.state.admin === true"
+            class="bg-blue-darken-2 ml-4"
+            @click="deleteInfo()"
+          >
+            Delete Project
+        </v-btn>
+    </section>
 
-    <TaskForm :projectId="projectId"/>
 </template>
 
 <style scoped>
@@ -108,6 +121,12 @@ export default {
     margin-bottom: 44px;
 }
 
+section {
+    display: flex; 
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+}
 
 
 

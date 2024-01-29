@@ -29,10 +29,7 @@ router.post('/create', async (req, res) => {
 
 router.get('/all', async (req, res) => {
     try {
-        const projectData = await Projects.findAll({ include: [
-            { model: Employee },
-            { model: Tasks }
-        ]});
+        const projectData = await Projects.findAll({});
         if (projectData) {
             res.status(200).json(projectData);
         }
@@ -63,6 +60,19 @@ router.post('/', async (req, res) => {
     }
 })
 
-
+router.post('/delete', async (req, res) => {
+    try {
+        const deletedProject = await Projects.destroy({
+            where: {
+                id: req.body.id
+            }
+        })
+        if (deletedProject) {
+            res.status(200).json(deletedProject);
+        }
+    } catch(err){
+        res.status(500).json(err);
+    }
+})
 
 module.exports = router;

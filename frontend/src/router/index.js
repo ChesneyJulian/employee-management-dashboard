@@ -73,7 +73,7 @@ router.beforeEach((to, from, next) =>  {
   } else
 
   if (to.name === 'admin' && !adminAccess) {
-    next({ name: 'home'})
+    next({ name: 'dashboard'})
   } else {
     next();
   }

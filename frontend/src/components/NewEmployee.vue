@@ -42,7 +42,6 @@ export default {
 </script>
 
 <template>
-<v-row justify="center">
         <v-dialog
           v-model="dialog"
           persistent
@@ -97,5 +96,4 @@ export default {
           </v-card>
         </v-form>
         </v-dialog>
-      </v-row>
 </template>

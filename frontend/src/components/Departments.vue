@@ -37,6 +37,7 @@ export default {
                 departments.data.map((department) => {
                     this.allDepartments.push({
                         departmentName: department.title,
+                        id: department.id,
                         location: department.location.address,
                         employeeParking: department.location.employeeParking,
                         employees: department.employees.map((employee) => {
@@ -48,6 +49,10 @@ export default {
                     })
                 });
             }
+        },
+        async deleteInfo(id) {
+          const deleteDepartment = await ManagementDataService.deleteDepartment(id);
+          location.reload();
         }
     }
 }
@@ -75,7 +80,14 @@ export default {
                     </template>
                 </v-expansion-panel>
             </v-expansion-panels>
-            </v-list>
+        </v-list>
+            <v-btn
+            v-if="this.$store.state.admin === true"
+            class="bg-blue-darken-2 mt-2 mb-2 ml-4"
+            @click="deleteInfo(this.departmentId)"
+          >
+            Delete Department
+          </v-btn>
         </v-card>
         <div v-if="showDepartments === true" class="mt-8">
             <v-card elevation="8"  v-for="department in allDepartments">
@@ -85,9 +97,9 @@ export default {
                     <v-list-item><strong class="mr-2">Department Location:</strong> {{ department.location }}</v-list-item>
                     <v-list-item v-if="department.employeeParking === true">Employee parking available.</v-list-item>
                     <v-list-item v-else>Employee parking not available.</v-list-item>
-                </v-list>
+               
                     <v-expansion-panels>
-                        <v-expansion-panel>
+                        <v-expansion-panel  elevation="0">
                             <template v-slot:title><strong>Employees</strong></template>
                             <template v-slot:text>
                                 <v-list>
@@ -100,6 +112,14 @@ export default {
                             </template>
                         </v-expansion-panel>
                     </v-expansion-panels>
+                </v-list>
+                    <v-btn
+                        v-if="this.$store.state.admin === true"
+                        class="bg-blue-darken-2 mt-2 mb-2 ml-4"
+                        @click="deleteInfo(department.id)"
+                    >
+                        Delete Department
+                    </v-btn>
             </v-card>
         </div>
         <div class="mb-16">

@@ -1,6 +1,6 @@
 import('dotenv/config.js')
 // const path = require('path');
-const cors = require('cors');
+import cors from 'cors';
 const bodyParser = require('body-parser');
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -25,13 +25,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(routes);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../client/dist')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  });
-}
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+//   });
+// }
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>

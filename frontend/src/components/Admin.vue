@@ -16,7 +16,6 @@ export default {
             })
         })
         const projectData = await ManagementDataService.fetchAllProjets();
-        console.log('projects ',projectData)
         projectData.data.map((project) => {
             this.projects.push({
                 title: project.title,
@@ -33,7 +32,7 @@ export default {
     data(){
         return {
             employees: [],
-            projects: []
+            projects: [],
         }
     },
     methods: {
@@ -50,25 +49,25 @@ export default {
 <template>
     <section>
     <v-card elevation="8">
-        <v-expansion-panels>
+        <v-expansion-panels multiple>
             <v-expansion-panel
             title="All Employees"
             >
             <template v-slot:text>
-                <v-list lines="three">
+                <v-list lines="two">
                     <v-list-item 
                     v-for="employee in employees"
                     @click="goToEmployee(employee.id)"
                     :title="employee.name"
                     :subtitle="employee.department"
+
                     ></v-list-item>
                 </v-list>
 
             </template>
-        </v-expansion-panel>
+            </v-expansion-panel>
             <v-expansion-panel
-            title="All Projects"
-            >
+            title="All Projects">
             <template v-slot:text>
                 <v-list lines="three">
                     <v-list-item 
@@ -99,11 +98,10 @@ export default {
 section {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  min-width: 100vw;
-  min-height: 70vh;
-  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  margin-top: 52px;
+  margin-bottom: 52px;
 }
 
 .v-container {

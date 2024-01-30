@@ -89,7 +89,7 @@ export default {
             Delete Department
           </v-btn>
         </v-card>
-        <div v-if="showDepartments === true" class="mt-8">
+        <div v-if="showDepartments === true">
             <v-card elevation="8"  v-for="department in allDepartments">
                 <template v-slot:title class="font-weight-bold">{{ department.departmentName }}</template>
                 <v-divider :thickness="8" ></v-divider>

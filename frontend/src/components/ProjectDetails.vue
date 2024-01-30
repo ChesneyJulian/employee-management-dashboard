@@ -3,11 +3,12 @@ import ManagementDataService from '../services/managementSystem'
 import EditTaskForm from './EditTaskForm.vue';
 import TaskForm from './TaskForm.vue';
 import router from '../router/index'
+
 export default {
     name: 'projectDetails',
     components: {
     EditTaskForm,
-    TaskForm
+    TaskForm,
 },
     mounted(){
         this.getData();
@@ -20,7 +21,7 @@ export default {
             },
             projectId: null,
             tasks: [],
-            employees: []
+            employees: [],
         }
     },
     methods: {
@@ -106,7 +107,7 @@ export default {
         <TaskForm :projectId="projectId"/>
         <v-btn
             v-if="this.$store.state.admin === true"
-            class="bg-blue-darken-2 ml-4"
+            class="bg-blue-darken-2 mx-4"
             @click="deleteInfo()"
           >
             Delete Project

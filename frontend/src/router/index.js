@@ -33,7 +33,6 @@ const router = createRouter({
       path: '/project-details/:projectId',
       name: 'projectDetails',
       component: ProjectDetails,
-      props: true
     },
     {
       path: '/timecard',

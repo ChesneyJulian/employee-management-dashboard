@@ -75,4 +75,25 @@ router.post('/delete', async (req, res) => {
     }
 })
 
+// router.put('/edit', async (req, res) => {
+//     try {
+//         const employeeProjectData = await EmployeeProjects.findAll({where: { 
+//             projectId: req.body.projectId
+//          }}).then( async (project)=> {
+//             for (let i = 0; i < req.body.employeeIds.length; i++) {
+//                 if (project[0].employeeId !== req.body.employeeIds[i]) {
+//                     const data = await EmployeeProjects.create({
+//                         projectId: req.body.projectId,
+//                         employeeId: req.body.employeeIds[i]
+//                     })
+//                 };
+//             }
+//         })
+//         res.status(200).json(employeeProjectData);
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// })
+
 module.exports = router;

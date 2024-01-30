@@ -5,13 +5,17 @@ const months = [
 ]
   export default {
     name: 'Timecard',
+    mounted(){
+      this.fetchHistory()
+    },
     data () {
       return {
         formDisplay: false,
         historyDisplay: true,
         dateVal: null,
         hours: null,
-        timecardHistory: []
+        timecardHistory: [],
+        alert: false,
       }
     },
     methods: {
@@ -19,6 +23,8 @@ const months = [
           const newTimecardData = await ManagementDataService.addTimecard(this.dateVal, this.hours, this.$store.state.employeeId);
           if (newTimecardData) {
             this.fetchHistory();
+          } else {
+            this.alert = true;
           }
         },
         async fetchHistory() {
@@ -54,9 +60,21 @@ const months = [
                   placeholder="8.25"
                   label="Hours worked"
                   ></v-text-field>
-                  <v-btn type="submit" block class="mt-2">Submit</v-btn>
+                  <v-btn type="submit"  block class="mt-2 bg-blue-darken-2">Save Timecard</v-btn>
               </v-sheet>
           </v-form>
+          <div>
+          <v-alert
+            v-model="alert"
+            variant="tonal"
+            closable
+            close-label="Close Alert"
+            color="red-lighten-1"
+            title="Uh oh!"
+          >
+          Timecard already exists for the selected date.
+          </v-alert>
+        </div>
       </v-container>
   </v-card>
   <v-card v-if="this.historyDisplay" title="Past Timecards" elevation="8">

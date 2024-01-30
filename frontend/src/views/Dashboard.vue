@@ -11,9 +11,10 @@ import dashboard from '../components/Dashboard.vue'
 <style scoped>
 section {
   display: flex;
-  flex-direction: row;
-  min-width: 100vw;
-  align-items: space-between;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 52px;
 }
 
 </style>

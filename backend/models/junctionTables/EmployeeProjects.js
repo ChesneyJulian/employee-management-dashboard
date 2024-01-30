@@ -23,7 +23,8 @@ EmployeeProjects.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'projects'
+                model: 'projects',
+                key: 'id'
             }
         }
     },

@@ -14,6 +14,7 @@ export default {
             department: '',
             location: '',
             phoneNumber: '',
+            alert: false,
         }
     },
     async mounted(){
@@ -29,11 +30,21 @@ export default {
     methods: {
         async editInfo() {
             const editInfo = await ManagementDataService.editEmployeeInfo(this.employeeId, this.phoneNumber, this.email);
-            location.reload();
+            if (editInfo) {
+              this.dialog = false;
+              location.reload();
+            } else {
+              this.dialog = true;
+              this.alert = true;
+            }
         },
         async deleteInfo() {
           const deleteEmployee = await ManagementDataService.deleteEmployee(this.employeeId);
           router.replace({path: `/admin`})
+        },
+        reload() {
+          this.dialog = false;
+          location.reload();
         }
     }
 }
@@ -67,7 +78,7 @@ export default {
             Edit Contact Info
           </v-btn>
           <v-btn
-            v-if="this.$store.state.admin === true"
+            v-if="this.$store.state.admin === true && this.$store.state.employeeId !== employeeId"
             class="bg-blue-darken-2 "
             @click="deleteInfo()"
           >
@@ -87,14 +98,13 @@ export default {
               <v-btn
                 color="red-darken-1"
                 variant="text"
-                @click="dialog = false"
+                @click="reload()"
                 >
                 Cancel
               </v-btn>
               <v-btn
               color="green-darken-1"
               variant="text"
-              @click="dialog = false"
               type="submit"
               >
               edit info
@@ -102,6 +112,16 @@ export default {
             </v-card-actions>
           </v-card>
         </v-form>
+          <v-alert
+            v-model="alert"
+            variant="tonal"
+            closable
+            close-label="Close Alert"
+            color="red-lighten-1"
+            title="Uh oh!"
+          >
+          Changes to employee contact information are not in valid format.
+          </v-alert>
         </v-dialog>
       </v-row>
     </div>

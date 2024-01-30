@@ -14,8 +14,8 @@ import projectForm from '../components/ProjectForm.vue'
 section {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: 100vh;
+  margin-top: 52px;
 }
 </style>

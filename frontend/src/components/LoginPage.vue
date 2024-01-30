@@ -8,6 +8,7 @@ export default {
     return {
       email: null,
       password: null,
+      alert: false,
       required (v) {
         return !!v || 'Field is required'
       },
@@ -16,6 +17,9 @@ export default {
   methods: {
     async login(email, password) {
       const data = await ManagementDataService.employeeLogin(email, password);
+      if (!data){
+        this.alert = true;
+      }
       const employeeInfo = data.employeeData;
       router.push({ path: `/dashboard/${employeeInfo.id}`});
       this.$store.commit({
@@ -44,6 +48,18 @@ export default {
       </v-btn>
     </v-form>
 </header>
+<div>
+    <v-alert
+      v-model="alert"
+      variant="tonal"
+      closable
+      close-label="Close Alert"
+      color="red-lighten-1"
+      title="Uh oh!"
+    >
+    Email or password is incorrect.
+    </v-alert>
+  </div>
 </template>
 
 <style scoped>
@@ -53,6 +69,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+margin-bottom: 24px;
 }
 h1 {
 margin-bottom: 4px;

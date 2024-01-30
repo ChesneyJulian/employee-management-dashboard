@@ -6,6 +6,7 @@ export default {
         return {
             dialog: false,
             address: null,
+            alert: false,
             employeeParking: false,
             required (v) {
                     return !!v || 'Field is required'
@@ -15,10 +16,12 @@ export default {
     methods: {
        async submitForm(){
        const locationData = await ManagementDataService.createLocation(this.address, this.employeeParking);
-       console.log(locationData); 
        if (locationData) {
         alert('Location added to database.')
+        this.dialog = false;
         location.reload();
+       } else {
+        this.alert = true;
        }
       }
     }
@@ -58,7 +61,7 @@ export default {
               <v-btn
               color="green-darken-1"
               variant="text"
-              @click="dialog = false"
+              @click=""
               type="submit"
               >
               Add Office Location
@@ -66,5 +69,17 @@ export default {
             </v-card-actions>
           </v-card>
         </v-form>
+        <v-card>
+          <v-alert
+            v-model="alert"
+            variant="tonal"
+            closable
+            close-label="Close Alert"
+            color="red-lighten-1"
+            title="Uh oh!"
+          >
+          The location info you entered is not valid.
+          </v-alert>
+        </v-card>
         </v-dialog>
 </template>

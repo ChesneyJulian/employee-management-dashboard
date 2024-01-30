@@ -1,4 +1,4 @@
-require('dotenv').config();
+import('dotenv/config.js')
 // const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');

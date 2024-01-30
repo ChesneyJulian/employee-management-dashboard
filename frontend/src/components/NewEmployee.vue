@@ -32,10 +32,9 @@ export default {
        async submitForm(){
        const employeeData = await  ManagementDataService.createEmployee(this.firstname, this.lastname, this.selectedDepartment, this.email, this.password, this.phoneNumber, this.admin);
        if (employeeData) {
-        alert('Employee added to database.')
-        dialog = false;
-        location.reload();
-       } else {
+         location.reload();
+         alert('Employee added to database.')
+        } else {
         this.alert = true;
        }
       }

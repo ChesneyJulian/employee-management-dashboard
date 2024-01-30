@@ -9,7 +9,7 @@ const routes = require('./controllers');
 const sequelize = require('./config/connection');
 
 const app = express();
-const PORT = process.env.PORT ?? 8080;
+const PORT = process.env.PORT || 8080;
 
 var corsOptions = {
   origin: "http://localhost:5173"

@@ -1,22 +1,16 @@
 <script>
 import router from '@/router';
-import AuthServices from '../services/auth'
+import AuthServices from '@/services/auth'
   export default {
     name: 'navbar',
-    data: () => ({
-      drawer: false,
-      group: null,
-    }),
-    watch: {
-      group () {
-        this.drawer = false
-      },
-    },
+    data: () => ({}),
     methods: {
+      // method to logout user session
       async logout() {
         AuthServices.destroyToken();
         router.replace({ name: 'home'});
       },
+      // method to route to employee dashboard
       toDashboard() {
         router.replace({ path: `/dashboard/${this.$store.state.employeeId}`});
       }

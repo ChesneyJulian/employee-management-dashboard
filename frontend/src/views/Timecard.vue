@@ -1,5 +1,5 @@
 <script setup>
-import Timecard from '../components/Timecard.vue';
+import Timecard from '@/components/Timecard.vue';
 </script>
 
 <template>

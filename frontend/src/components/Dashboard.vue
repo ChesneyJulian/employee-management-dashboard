@@ -1,7 +1,8 @@
 <script>
-import router from '../router/index'
+import router from '@/router/index'
   export default {
-    name: 'dashboard',
+    name: 'Dashboard',
+    // when component is mounted, set this.admin to the admin property in vuex store
     mounted(){
       this.admin = this.$store.state.admin
     },
@@ -36,15 +37,18 @@ import router from '../router/index'
       ],
     }),
     methods: {
+      // method to route to card's path when clicked
       followPath(path) {
         router.push(path)
       }
     }
   }
 </script>
+
 <template>
   <v-container class="mx-auto">
     <v-row dense>
+      <!-- conditional rendering of admin card -->
       <v-col cols="12"  v-if="this.admin === true">
         <v-hover v-slot="{ isHovering, props }">
           <v-card
@@ -58,6 +62,7 @@ import router from '../router/index'
           </v-card>
         </v-hover>
       </v-col>
+      <!-- iterative rendering of cards using cards array in data -->
       <v-col v-for="card in cards" :key="card.title" cols="6">
         <v-hover v-slot="{ isHovering, props }">
           <v-card 
@@ -67,13 +72,11 @@ import router from '../router/index'
           v-bind="props"
           height="200px"
           @click="followPath(card.path)">
-          <v-card-title class="text-white font-weight-medium text-h4 my-2" v-text="card.title"></v-card-title>
-
+            <v-card-title class="text-white font-weight-medium text-h4 my-2" v-text="card.title"></v-card-title>
             <v-card-text class="text-white text-subtitle-1 font-weight-normal" v-text="card.description"></v-card-text>
           </v-card>
         </v-hover>
       </v-col>
-      
     </v-row>
   </v-container>
 </template>

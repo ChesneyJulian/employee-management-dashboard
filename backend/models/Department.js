@@ -15,7 +15,7 @@ Department.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-//    CREATE RELATIONSHIP TO LOCATION
+    // reference to Location model
         locationId: {
             type: DataTypes.INTEGER,
             allowNull: false,

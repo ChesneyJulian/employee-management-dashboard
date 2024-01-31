@@ -1,9 +1,9 @@
 <script>
-import ManagementDataService from '../services/managementSystem'
-import router from '../router/index'
+import ManagementDataService from '@/services/managementSystem'
+import router from '@/router/index'
 
 export default {
-  name: "login",
+  name: "Login",
   data() {
     return {
       email: null,
@@ -15,13 +15,17 @@ export default {
     }
   },
   methods: {
+    // method to pass form data to back end through ManagementDataService
     async login(email, password) {
       const data = await ManagementDataService.employeeLogin(email, password);
+      // if login fails, set alert to true to indicate that login info was incorrect
       if (!data){
         this.alert = true;
       }
       const employeeInfo = data.employeeData;
+      // route to dashboard using employee id
       router.push({ path: `/dashboard/${employeeInfo.id}`});
+      // save employeeInfo to vuex store
       this.$store.commit({
         type: 'assign',
         data: employeeInfo
@@ -29,7 +33,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <template>

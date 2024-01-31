@@ -11,6 +11,7 @@ EmployeeProjects.init(
             primaryKey: true,
             autoIncrement: true
         },
+        // reference to Employee model
         employeeId: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -19,6 +20,7 @@ EmployeeProjects.init(
                 key: 'id'
             }
         },
+        // reference to Projects model
         projectId: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -1,7 +1,7 @@
 <script>
-  import ManagementDataService from '../services/managementSystem'
+  import ManagementDataService from '@/services/managementSystem'
     export default {
-        name: 'taskForm',
+        name: 'TaskForm',
         props: {
             projectId: Number
         },  
@@ -19,6 +19,7 @@
             }
         },
         methods: {
+          // method to submit task form to add task to database
             async addTask(title, description, inProgress, completed, parentProject){
                 const newTask = await ManagementDataService.createTask(title, description, inProgress, completed, parentProject);
                 location.reload();
@@ -29,20 +30,18 @@
 
 <template>
     <div>
+      <v-btn
+        class="bg-blue-darken-2"
+        @click="dialog = true"
+      >
+        Add Task
+      </v-btn>
       <v-row justify="center">
         <v-dialog
           v-model="dialog"
           persistent
           width="auto"
         >
-          <template v-slot:activator="{ props }">
-            <v-btn
-              class="bg-blue-darken-2"
-              v-bind="props"
-            >
-              Add Task
-            </v-btn>
-          </template>
           <v-form @submit.prevent="addTask(title, description, inProgress, completed, projectId)" >
             <v-card>
               <v-responsive class="mx-auto mb-4" min-width="344">

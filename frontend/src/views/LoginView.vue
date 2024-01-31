@@ -1,10 +1,10 @@
 <script setup>
-import login from '../components/LoginPage.vue'
+import Login from '@/components/LoginPage.vue'
 </script>
 
 <template>
   <section>
-    <login />
+    <Login />
   </section>
 </template>
 

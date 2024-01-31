@@ -1,10 +1,10 @@
 <script setup>
-import projectDetails from '../components/ProjectDetails.vue'
+import ProjectDetails from '@/components/ProjectDetails.vue'
 </script>
 
 <template>
   <section>
-    <projectDetails />
+    <ProjectDetails />
   </section>
 </template>
 

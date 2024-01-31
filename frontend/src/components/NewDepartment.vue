@@ -1,8 +1,9 @@
 <script>
-import ManagementDataService from '../services/managementSystem'
+import ManagementDataService from '@/services/managementSystem'
 export default {
     name: 'NewDepartment',
     async mounted(){
+      // once mounted, get all locations and push to locationOptions
        const locations = await ManagementDataService.getLocations();
        locations.data.map((location) => {
             this.locationOptions.push({
@@ -24,14 +25,15 @@ export default {
         }
     },
     methods: {
+      // method to submit new department form data to database
        async submitForm(){
        const departmentData = await ManagementDataService.createDepartment(this.title, this.selectedLocation);
        console.log(departmentData); 
        if (departmentData) {
-        alert('Department added to database.')
         this.dialog = false;
         location.reload();
        } else {
+        // alert if data is not valid
         this.alert = true;
        }
       }
@@ -40,42 +42,39 @@ export default {
 </script>
 
 <template>
+  <v-btn
+  @click="dialog = true"
+  class="bg-blue-darken-2"
+  >
+  Add Department
+  </v-btn>
   <v-dialog
     v-model="dialog"
     persistent
     width="auto"
   >
-    <template v-slot:activator="{ props }">
-      <v-btn
-      @click="active = goal"
-      class="bg-blue-darken-2"
-        v-bind="props"
-      >
-        Add Department
-      </v-btn>
-    </template>
     <v-form @submit.prevent="submitForm()" >
       <v-card>
         <v-responsive class="mx-auto mb-4" min-width="344">
           <v-text-field hide-details="auto" label="Department Title" :rules="[required]" placeholder="Department Title" v-model="title" type="input"></v-text-field>
         </v-responsive>
+        <!-- select menu iterates over locationOptions -->
         <v-select :items="locationOptions" :item-props="true" label="Location" v-model="this.selectedLocation" hint="New Department Location" persistent-hint></v-select>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-          color="red-darken-1"
+          color="red-darken-2"
           variant="text"
-          @click="dialog = false; goal = null"
+          @click="dialog = false"
           >
           Cancel
           </v-btn>
           <v-btn
-          color="green-darken-1"
+          color="green-darken-2"
           variant="text"
-          @click=""
           type="submit"
           >
-          Add Department
+          Save Department
           </v-btn>
         </v-card-actions>
       </v-card>

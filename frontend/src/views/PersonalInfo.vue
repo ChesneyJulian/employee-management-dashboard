@@ -1,5 +1,5 @@
 <script setup>
-import PersonalCard from '../components/PersonalCard.vue'
+import PersonalCard from '@/components/PersonalCard.vue'
 </script>
 
 <template >

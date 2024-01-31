@@ -1,10 +1,9 @@
 <script>
 import router from '@/router';
-import AuthServices from '../services/auth'
-import ManagementDataService from '../services/managementSystem';
+import ManagementDataService from '@/services/managementSystem';
 
 export default {
-    name: 'personalCard',
+    name: 'PersonalCard',
     data() {
         return {
             dialog: false,
@@ -18,9 +17,12 @@ export default {
         }
     },
     async mounted(){
+        // once component is mounted, extract employeeId from path name 
         const path = location.pathname.split('')
         this.employeeId = parseInt(path[path.length - 1])
+        // fetch employee info using employeeId
         const employeeData = await ManagementDataService.singleEmployeeInfo(this.employeeId);
+        // use employeeData to give value to properties in component data
         this.name = (`${employeeData.data.firstName} ${employeeData.data.lastName}`)
         this.email = employeeData.data.email;
         this.department = employeeData.data.department.title;
@@ -28,6 +30,7 @@ export default {
         this.phoneNumber = employeeData.data.phoneNumber;
     },
     methods: {
+      // method to submit form data to edit employee info 
         async editInfo() {
             const editInfo = await ManagementDataService.editEmployeeInfo(this.employeeId, this.phoneNumber, this.email);
             if (editInfo) {
@@ -38,17 +41,18 @@ export default {
               this.alert = true;
             }
         },
+        // method to delete employee 
         async deleteInfo() {
           const deleteEmployee = await ManagementDataService.deleteEmployee(this.employeeId);
           router.replace({path: `/admin`})
         },
+        // method to reload page (used if edit info is cancelled so that data on card reverts to original)
         reload() {
           this.dialog = false;
           location.reload();
         }
     }
 }
-
 </script>
 
 <template>
@@ -63,28 +67,30 @@ export default {
     </v-list>
   </v-card>
   <div>
+    <!-- conditionally render button to open edit info form dialog if employeeId matches user's stored employeeId-->
+    <v-btn
+      v-if="employeeId === this.$store.state.employeeId"
+      class="bg-blue-darken-2 mr-4"
+      @click="dialog = true"
+    >
+      Edit Contact Info
+    </v-btn>
+    <!-- conditional render of delete button so only admin has option to delete an employee, but cannot delete their own account -->
+    <v-btn
+      v-if="this.$store.state.admin === true && this.$store.state.employeeId !== employeeId"
+      class="bg-blue-darken-2 "
+      @click="deleteInfo()"
+    >
+      Delete Employee Account
+    </v-btn>
+<!-- dialog form that only renders if dialog = true -->
     <v-row justify="center">
       <v-dialog
         v-model="dialog"
         persistent
         width="auto"
       >
-        <template v-slot:activator="{ props }">
-          <v-btn
-            v-if="employeeId === this.$store.state.employeeId"
-            class="bg-blue-darken-2 mr-4"
-            v-bind="props"
-          >
-            Edit Contact Info
-          </v-btn>
-          <v-btn
-            v-if="this.$store.state.admin === true && this.$store.state.employeeId !== employeeId"
-            class="bg-blue-darken-2 "
-            @click="deleteInfo()"
-          >
-            Delete Employee Account
-          </v-btn>
-        </template>
+        <!-- edit employee info form -->
         <v-form @submit.prevent="editInfo()" >
           <v-card>
             <v-responsive class="mx-auto mb-4" min-width="344">
@@ -96,23 +102,21 @@ export default {
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
-                color="red-darken-1"
+                color="red-darken-2"
                 variant="text"
                 @click="reload()"
                 >
                 Cancel
               </v-btn>
               <v-btn
-              color="green-darken-1"
+              color="green-darken-2"
               variant="text"
               type="submit"
               >
-              edit info
+              save changes
               </v-btn>
             </v-card-actions>
-          </v-card>
-        </v-form>
-          <v-alert
+            <v-alert
             v-model="alert"
             variant="tonal"
             closable
@@ -120,11 +124,13 @@ export default {
             color="red-lighten-1"
             title="Uh oh!"
           >
-          Changes to employee contact information are not in valid format.
-          </v-alert>
+            Changes to employee contact information are not in valid format.
+            </v-alert>
+          </v-card>
+        </v-form>
         </v-dialog>
       </v-row>
-    </div>
+  </div>
 </template>
 
 <style scoped>

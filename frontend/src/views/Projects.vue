@@ -1,12 +1,12 @@
 <script setup>
-import projectTable from '../components/ProjectTable.vue'
-import projectForm from '../components/ProjectForm.vue'
+import ProjectTable from '@/components/ProjectTable.vue'
+import ProjectForm from '@/components/ProjectForm.vue'
 </script>
 
 <template>
   <section>
-    <projectTable/>
-    <projectForm /> 
+    <ProjectTable/>
+    <ProjectForm /> 
   </section>
 </template>
 

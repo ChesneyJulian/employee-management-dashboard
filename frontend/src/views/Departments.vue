@@ -1,10 +1,10 @@
 <script setup>
-import departments from '../components/Departments.vue'
+import Departments from '@/components/Departments.vue'
 </script>
 
 <template>
   <section>
-    <departments />
+    <Departments />
   </section>
 </template>
 

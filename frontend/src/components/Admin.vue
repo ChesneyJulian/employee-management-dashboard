@@ -1,12 +1,14 @@
 <script>
-import NewEmployee from './NewEmployee.vue'
-import NewDepartment from './NewDepartment.vue';
-import NewLocation from './NewLocation.vue';
-import ManagementDataService from '../services/managementSystem'
-import router from '../router/index'
+import NewEmployee from '@/components/NewEmployee.vue'
+import NewDepartment from '@/components/NewDepartment.vue';
+import NewLocation from '@/components/NewLocation.vue';
+import ManagementDataService from '@/services/managementSystem'
+import router from '@/router/index'
+
 export default {
-    name: 'adminPortal',
+    name: 'AdminPortal',
     async mounted(){
+        // once component is mounted, fetch all employee data and all project data and push each as object to employees array and projects array
         const employeeData = await ManagementDataService.fetchEmployees();
         employeeData.data.map((employee) => {
             this.employees.push({
@@ -28,7 +30,7 @@ export default {
     NewEmployee,
     NewDepartment,
     NewLocation
-},
+    },
     data(){
         return {
             employees: [],
@@ -36,9 +38,11 @@ export default {
         }
     },
     methods: {
+        // method to route to employee info page when employee name is clicked
         goToEmployee(id){
             router.replace({path: `/info/${id}`})
         },
+        // method to route to project details page when project is clicked
         goToProject(id) {
             router.replace({path: `/project-details/${id}`})
         }
@@ -50,41 +54,40 @@ export default {
     <section>
     <v-card elevation="8">
         <v-expansion-panels multiple>
-            <v-expansion-panel
-            title="All Employees"
-            >
-            <template v-slot:text>
-                <v-list lines="two">
-                    <v-list-item 
-                    v-for="employee in employees"
-                    @click="goToEmployee(employee.id)"
-                    :title="employee.name"
-                    :subtitle="employee.department"
-
-                    ></v-list-item>
-                </v-list>
-
-            </template>
+            <v-expansion-panel title="All Employees" >
+                <template v-slot:text>
+                    <!-- iterate over employees and render as list item within expansion panel -->
+                    <v-list lines="two">
+                        <v-list-item 
+                        v-for="employee in employees"
+                        @click="goToEmployee(employee.id)"
+                        :title="employee.name"
+                        :subtitle="employee.department"
+                        ></v-list-item>
+                    </v-list>
+                </template>
             </v-expansion-panel>
-            <v-expansion-panel
-            title="All Projects">
-            <template v-slot:text>
-                <v-list lines="three">
-                    <v-list-item 
-                    v-for="project in projects"
-                    @click="goToProject(project.id)"
-                    :title="project.title"
-                    :subtitle="project.description"
-                    ></v-list-item>
-                </v-list>
-
-            </template>
+            <v-expansion-panel title="All Projects">
+                <template v-slot:text>
+                    <v-list lines="three">
+                        <!-- iterate over projects and render as list item within expansion panel -->
+                        <v-list-item 
+                        v-for="project in projects"
+                        @click="goToProject(project.id)"
+                        :title="project.title"
+                        :subtitle="project.description"
+                        ></v-list-item>
+                    </v-list>
+                </template>
         </v-expansion-panel>
     </v-expansion-panels>
     </v-card>
     <v-container>
+        <!-- component with form to add new employee -->
         <NewEmployee />
+        <!-- component with form to add new department -->
         <NewDepartment />
+        <!-- component with form to add new location -->
         <NewLocation />
     </v-container>
     </section>

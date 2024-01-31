@@ -53,6 +53,7 @@ Employee.init(
         type: DataTypes.BOOLEAN,
         allowNull: false,
        },
+        //    reference to Department model
        departmentId: {
         type: DataTypes.INTEGER,
         allowNull: false,

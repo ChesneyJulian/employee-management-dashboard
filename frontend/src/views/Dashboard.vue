@@ -1,10 +1,10 @@
 <script setup>
-import dashboard from '../components/Dashboard.vue'
+import Dashboard from '@/components/Dashboard.vue'
 </script>
 
 <template>
     <section class="mx-auto">
-      <dashboard />
+      <Dashboard />
     </section>
 </template>
 

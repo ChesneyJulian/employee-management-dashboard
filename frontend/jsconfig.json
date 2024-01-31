@@ -1,3 +1,4 @@
+// tells vite what path to compile (src folder) and what to ignore (dist, node_modules)
 {
   "compilerOptions": {
     "paths": {

@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
+// configure vite to serve VueJS 
 export default defineConfig({
   plugins: [
     vue(),

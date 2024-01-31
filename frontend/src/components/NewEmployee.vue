@@ -68,7 +68,7 @@ export default {
             <v-text-field hide-details="auto" label="Email" :rules="[required]" placeholder="Email" v-model="email" type="email"></v-text-field>
           </v-responsive>
           <v-responsive class="mx-auto mb-4" min-width="344">
-            <v-text-field hide-details="auto" label="Phone Number" :rules="[required]" placeholder="(800)100-200" v-model="phoneNumber" type="input"></v-text-field>
+            <v-text-field hide-details="auto" label="Phone Number" :rules="[required]" placeholder="(111)222-3333" v-model="phoneNumber" type="input"></v-text-field>
           </v-responsive>
           <v-responsive class="mx-auto mb-4" min-width="344">
             <v-text-field hide-details="auto" label="Password" :rules="[required]" placeholder="Password" v-model="password" type="password"></v-text-field>

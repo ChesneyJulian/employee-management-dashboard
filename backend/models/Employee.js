@@ -36,6 +36,7 @@ Employee.init(
        phoneNumber: {
         type: DataTypes.STRING,
         unique: true,
+        allowNull: false,
         validate: {
             // regex to match phone number with parenthesis or dashes
             is: /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/g

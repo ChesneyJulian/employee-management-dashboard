@@ -6,8 +6,8 @@ const Timesheet = require('./Timesheet');
 const EmployeeProjects = require('./junctionTables/EmployeeProjects');
 const Tasks = require('./Tasks');
 
-// Employee One to One relationship with Timesheet
-Employee.hasOne(Timesheet, {
+// Employee One to Many relationship with Timesheet
+Employee.hasMany(Timesheet, {
     foreignKey: 'worker'
 });
 
@@ -26,7 +26,7 @@ Projects.belongsToMany(Employee, {
     foreignKey: 'projectId'
 });
 
-// One to many relationship between projects and tasks
+// Projects One to many relationship with Tasks
 Projects.hasMany(Tasks, {
     foreignKey: 'parentProject'
 });

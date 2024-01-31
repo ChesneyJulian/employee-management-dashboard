@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Location } = require('../../models')
 
+// create new location
 router.post('/create', async (req, res) => {
     try {
         const newLocation = await Location.create({
@@ -9,24 +10,20 @@ router.post('/create', async (req, res) => {
         });
         if (newLocation) {
             res.status(200).json(newLocation);
-        } else {
-            res.status(404).json('New location not found');
-        }
-
+        };
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
+// get all location data 
 router.get('/all', async (req, res) => {
     try {
         const locationData = await Location.findAll();
         if (locationData) {
             res.status(200).json(locationData);
-        } else {
-            res.status(404).json('No locations found.')
-        }
+        };
     } catch (err) {
         res.status(500).json(err);
     }

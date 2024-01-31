@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const { Employee, Department, Projects, Tasks, Location } = require('../../models')
 const { signToken } = require('../../utils/auth');
-// create new employee data
+
+// create new employee 
 router.post('/create', async (req, res) => {
     try {
         const newEmployee = await Employee.create({
@@ -23,6 +24,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
+// delete employee with id that matches req.body id
 router.post('/delete', async (req, res) => {
     try {
         const employeeData = await Employee.destroy({
@@ -30,7 +32,6 @@ router.post('/delete', async (req, res) => {
                 id: req.body.id
             }
         });
-
         if (employeeData){
             res.status(200).json(employeeData);
         }
@@ -40,7 +41,7 @@ router.post('/delete', async (req, res) => {
     }
 })
 
-// get all employees
+// get all employees and include models Department and Projects
 router.get('/all', async (req, res) => {
     try {
         const employeeData = await Employee.findAll({ include: 
@@ -54,15 +55,13 @@ router.get('/all', async (req, res) => {
         });
         if (employeeData) {
             res.status(200).json(employeeData);
-        } else {
-            res.status(404).json('No employee data found')
-        }
+        };
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-// get single employees projects
+// find single employee by req.body id and include model Projects which includes model Tasks
 router.post('/your-projects', async (req, res) => {
     try {
         const employeeData = await Employee.findByPk(req.body.id, 
@@ -77,6 +76,7 @@ router.post('/your-projects', async (req, res) => {
     }
 });
 
+// find employee by req.body id and include model Department which includes Location
 router.post('/', async (req, res) => {
     try {
         const employeeData = await Employee.findByPk(req.body.id, {
@@ -93,6 +93,7 @@ router.post('/', async (req, res) => {
     }
 })
 
+// find employee with email that matches req.body email
 router.post('/login', async (req, res) => {
     try {
         const employeeData = await Employee.findOne({
@@ -101,21 +102,22 @@ router.post('/login', async (req, res) => {
             }
         })
         if (!employeeData)  return res.status(400).json({ message: 'Incorrect email.'});
-
+        // check req.body password against encrypted password in database
         const correctPassword = employeeData.checkPassword(req.body.password);
 
         if (correctPassword) {
+            // sign jwt for authentication and return token along with employeeData
            const token =  signToken(employeeData);
             res.status(200).json({ token, employeeData });
         } else {
             return res.status(404).json({ message: 'Incorrect password'});
         }
-
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
+// update employee info with id that matches req.body id 
 router.put('/edit', async (req, res) => {
     try {
         const updatedData = await Employee.update({

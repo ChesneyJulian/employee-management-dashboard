@@ -2,12 +2,14 @@ const router = require('express').Router();
 const { Projects, EmployeeProjects, Employee, Tasks, Department } = require('../../models');
 const { authMiddleware } = require('../../utils/auth');
 
+// create new project 
 router.post('/create', async (req, res) => {
     try {
         const newProject = await Projects.create({
             title: req.body.title,
             description: req.body.description
         }).then((project) => {
+            // map employeeIds into proper format for EmployeeProjects model
             if (req.body.employeeIds.length) {
                 const employeeIdArr = req.body.employeeIds.map((employeeId) => {
                     return {
@@ -15,6 +17,7 @@ router.post('/create', async (req, res) => {
                         employeeId
                     };
                 });
+                // bulk create EmployeeProjects
                 return EmployeeProjects.bulkCreate(employeeIdArr);
             }
         })
@@ -27,6 +30,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
+// get all projects
 router.get('/all', async (req, res) => {
     try {
         const projectData = await Projects.findAll({});
@@ -38,7 +42,8 @@ router.get('/all', async (req, res) => {
         res.status(500).json(err);
     }
 });
-
+// find single project that matches req.body projectId
+// include models Tasks and Employee, which includes Department
 router.post('/', async (req, res) => {
     try {
         const singleProjectData = await Projects.findByPk(req.body.projectId, {
@@ -60,6 +65,7 @@ router.post('/', async (req, res) => {
     }
 })
 
+// delete project with id that matches req.body id
 router.post('/delete', async (req, res) => {
     try {
         const deletedProject = await Projects.destroy({
@@ -74,26 +80,5 @@ router.post('/delete', async (req, res) => {
         res.status(500).json(err);
     }
 })
-
-// router.put('/edit', async (req, res) => {
-//     try {
-//         const employeeProjectData = await EmployeeProjects.findAll({where: { 
-//             projectId: req.body.projectId
-//          }}).then( async (project)=> {
-//             for (let i = 0; i < req.body.employeeIds.length; i++) {
-//                 if (project[0].employeeId !== req.body.employeeIds[i]) {
-//                     const data = await EmployeeProjects.create({
-//                         projectId: req.body.projectId,
-//                         employeeId: req.body.employeeIds[i]
-//                     })
-//                 };
-//             }
-//         })
-//         res.status(200).json(employeeProjectData);
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json(err);
-//     }
-// })
 
 module.exports = router;

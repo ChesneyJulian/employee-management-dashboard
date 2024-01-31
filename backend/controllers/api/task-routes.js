@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const { Projects, Tasks } = require('../../models');
+const { Tasks } = require('../../models');
 
+// create new task
 router.post('/create', async (req, res) => {
     try {
         const newTask = await Tasks.create({
@@ -20,6 +21,7 @@ router.post('/create', async (req, res) => {
     }
 });
 
+// update task with id that matches req.body id
 router.put('/edit', async (req, res) => {
     try {
         const updatedData = await Tasks.update({

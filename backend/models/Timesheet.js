@@ -14,13 +14,12 @@ Timesheet.init(
         date: {
             type: DataTypes.DATEONLY,
             allowNull: false,
-            // unique: true
         },
         hoursWorked: {
             type: DataTypes.FLOAT,
             allowNull: false
         },
-//  CREATE RELATIONSHIP TO EMPLOYEE 
+        // reference to Employee model
         worker: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -32,6 +31,7 @@ Timesheet.init(
     },
     {
         uniqueKeys: {
+            // ensures that one worker does not create multiple timesheets for one date
             entry_unique: {
               fields: ['worker', 'date'],
             },

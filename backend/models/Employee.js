@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 
 class Employee extends Model {
-    // method to check that password attempt matches hashed password upon login
+    // method to check that password attempt matches encrypted password upon login 
     checkPassword(passwordAttempt) {
         return bcrypt.compareSync(passwordAttempt, this.password)
     }
@@ -37,6 +37,7 @@ Employee.init(
         type: DataTypes.STRING,
         unique: true,
         validate: {
+            // regex to match phone number with parenthesis or dashes
             is: /^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$/g
         }
        },

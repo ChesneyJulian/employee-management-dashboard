@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Timesheet, Employee } = require('../../models')
 
+// create new timesheet 
 router.post('/create', async (req, res) => {
     try {
         const newTimesheet = await Timesheet.create({
@@ -10,21 +11,22 @@ router.post('/create', async (req, res) => {
         });
         if (newTimesheet) {
             res.status(200).json(newTimesheet);
-        } else {
-            res.status(4).json('New timesheet not found');
-        }
+        };
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
+// get all timesheets that have a worker id that matches req.body.id
+// include model Employee
 router.post('/', async (req, res) => {
     try {
         const employeeTimesheetData = await Timesheet.findAll({
             where: {
                 worker: req.body.employeeId
             },
+            // sort in descending order by date
             order: [['date', 'DESC']],
             include: [{ model: Employee }]
          });

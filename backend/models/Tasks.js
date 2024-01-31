@@ -28,6 +28,7 @@ Tasks.init(
             defaultValue: false,
             allowNull: false,
         },
+        //  reference to Project model
         parentProject: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Department, Location, Employee } = require('../../models')
 
+// create department
 router.post('/create', async (req, res) => {
     try {
         const newDepartment = await Department.create({
@@ -9,21 +10,18 @@ router.post('/create', async (req, res) => {
         });
         if (newDepartment) {
             res.status(200).json(newDepartment);
-        } else {
-            res.status(404).json('New department not found');
-        }
-
+        };
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
 });
 
+// get all departments and include models Location and Employee
 router.get('/all', async (req, res) => {
     try {
         const departmentData = await Department.findAll({ include: [{ model: Location }, { model: Employee }] })
         if (departmentData) {
-            console.log(departmentData);
             return res.status(200).json( departmentData );
         } 
     } catch (err) {
@@ -31,6 +29,8 @@ router.get('/all', async (req, res) => {
     }
 })
 
+// get single department with id that matches req.body departmentId 
+//  include models Employee and Location
 router.post('/your-department', async (req, res) => {
     try {
         const departmentData = await Department.findByPk(req.body.departmentId, {
@@ -51,6 +51,7 @@ router.post('/your-department', async (req, res) => {
     }
 })
 
+// delete department with id that matches req.body.id
 router.post('/delete', async (req, res) => {
     try {
         const deletedDepartment = await Department.destroy({

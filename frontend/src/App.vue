@@ -1,5 +1,5 @@
 <script>
-import { RouterView, RouterLink } from 'vue-router'
+import { RouterView } from 'vue-router'
 import AuthServices from './services/auth'
 import navbar from './components/Navigation.vue'
 // import ManagementDataService from './services/managementSystem'
@@ -22,13 +22,14 @@ export default {
   },
   methods: {}
 }
-
 </script>
 
-<template>
+  <template>
+    <v-app light>
     <navbar v-if="this.$route.name != 'home'"/>
     <RouterView  />
-</template>
+  </v-app>
+  </template>
 
-<style scoped>
+<style>
 </style>

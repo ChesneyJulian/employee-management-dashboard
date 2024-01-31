@@ -1,6 +1,6 @@
-import('dotenv/config.js')
+require('dotenv').config();
 // const path = require('path');
-import cors from 'cors';
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
 const jwt = require('jsonwebtoken');

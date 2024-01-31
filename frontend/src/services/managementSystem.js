@@ -90,8 +90,10 @@ class ManagementDataService {
     }
     // create new project
     createProject = async (title, description, employeeIds) => {
-       try { const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});
-        return newProjectData; } catch (err) {
+       try { 
+        const newProjectData = await http.post("/api/projects/create", {title, description, employeeIds});
+        if (newProjectData) return newProjectData; 
+    } catch (err) {
             return;
         }
     }

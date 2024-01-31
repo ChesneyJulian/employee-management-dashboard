@@ -18,9 +18,10 @@
                 required (v) {
                     return !!v || 'Field is required'
                 },  
+                alert: false,
                 dialog: false,
-                title: '',
-                description: '',
+                title: null,
+                description: null,
                 employeeOptions: [],
                 selectedEmployees: null,
             }
@@ -29,7 +30,13 @@
           // method to submit project form data to add project to database
             async addProjectData(title, description, selectedEmployees) {
                 const data = await ManagementDataService.createProject(title, description, selectedEmployees);
-                location.reload();
+                if (data) {
+                  this.dialog = false;
+                  this.alert = false;
+                  location.reload();
+                } else {
+                  this.alert = true;
+                }
             }
         }
     }
@@ -64,19 +71,30 @@
                 <v-btn
                 color="red-darken-2"
                 variant="text"
-                @click="dialog = false"
+                @click="dialog = false; alert = false"
                 >
                 Cancel
               </v-btn>
               <v-btn
               color="green-darken-2"
               variant="text"
-              @click="dialog = false"
               type="submit"
               >
               Save project
               </v-btn>
             </v-card-actions>
+            <v-card>
+              <v-alert
+              v-model="alert"
+              variant="tonal"
+              closable
+              close-label="Close Alert"
+              color="red-lighten-1"
+              title="Uh oh!"
+              >
+              Please enter all fields.
+              </v-alert>
+            </v-card>
           </v-card>
         </v-form>
         </v-dialog>

@@ -29,7 +29,6 @@
 </script>
 
 <template>
-    <div>
       <v-btn
         class="bg-blue-darken-2"
         @click="dialog = true"
@@ -84,5 +83,4 @@
         </v-form>
         </v-dialog>
       </v-row>
-    </div>
 </template>

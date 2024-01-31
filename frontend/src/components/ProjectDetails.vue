@@ -118,7 +118,7 @@ export default {
         <!-- conditionally render delete project btn for users with admin capabilities -->
         <v-btn
             v-if="this.$store.state.admin === true"
-            class="bg-blue-darken-2 mx-4"
+            class="bg-blue-darken-2 ml-12"
             @click="deleteInfo()"
           >
             Delete Project
@@ -135,7 +135,7 @@ export default {
 
 section {
     display: flex; 
-    width: 80vw;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }

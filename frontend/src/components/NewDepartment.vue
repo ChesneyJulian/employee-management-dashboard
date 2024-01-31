@@ -28,7 +28,6 @@ export default {
       // method to submit new department form data to database
        async submitForm(){
        const departmentData = await ManagementDataService.createDepartment(this.title, this.selectedLocation);
-       console.log(departmentData); 
        if (departmentData) {
         this.dialog = false;
         location.reload();

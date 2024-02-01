@@ -15,6 +15,7 @@ export default {
     },
     data(){
         return {
+            alert: false,
             project: {
                 title: '',
                 description: '',
@@ -119,12 +120,27 @@ export default {
         <v-btn
             v-if="this.$store.state.admin === true"
             class="bg-blue-darken-2 ml-12"
-            @click="deleteInfo()"
+            @click="alert = true"
           >
             Delete Project
         </v-btn>
     </section>
 
+
+    <v-card>
+      <v-alert
+        v-model="alert"
+        variant="tonal"
+        closable
+        close-label="Close Alert"
+        color="red-lighten-1"
+        title="Uh oh!"
+      >
+      Are you sure you want to delete this project?
+      <v-btn @click="deleteInfo()">Yes</v-btn>
+      <v-btn @click="alert = false">No</v-btn>
+      </v-alert>
+    </v-card>
 </template>
 
 <style scoped>
